@@ -40,11 +40,7 @@ export class NavbarComponent implements OnInit {
     }
 
     logout(): void {
-        this.router.navigateByUrl('/login')
         this.storageService.clean();
-        window.location.reload();
-
+        this.router.navigateByUrl('/login')
     }
-
-
 }

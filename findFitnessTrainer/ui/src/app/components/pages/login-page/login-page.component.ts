@@ -14,7 +14,7 @@ import {AppComponent} from "../../../app.component";
 export class LoginPageComponent implements OnInit {
 
     formData: any;
-    showError: any;
+    showError: boolean = false;
     isLoggedIn = false;
     isLoginFailed = false;
     errorMessage = '';
@@ -50,30 +50,25 @@ export class LoginPageComponent implements OnInit {
         this.showError = false;
     }
 
-    // toProfile(){
-    //     this.authService.login(this.formData.controls.email.value, this.formData.controls.password.value)
-    //         .pipe(
-    //             catchError(error => {
-    //                 this.showError=true
-    //                 this.isLoginFailed = true;
-    //                 return empty();
-    //             })
-    //         )
-    //         .subscribe(res => {this.authService.isLoggedIn=true,
-    //             this.router.navigateByUrl('/')});
-    //     this.isLoginFailed = false;
-    //     this.isLoggedIn = true;
-    //     this.roles = this.storageService.getUser().roles;
-    // };
-
     toProfile() {
         if (this.formData.controls.email.value == "admin" && this.formData.controls.password.value == "admin") {
-            this.storageService.saveUser("admin");
-            this.authService.isAdmin = true;
-            this.isLoggedIn = true;
-            this.authService.isLoggedIn = true;
-            this.router.navigateByUrl('/admin').then(r => this.reloadPage());
-            this.reloadPage();
+            this.authService.login(this.formData.controls.email.value, this.formData.controls.password.value).subscribe({
+                    next: data => {
+                        this.storageService.saveUser(data);
+                        this.isLoginFailed = false;
+                        this.isLoggedIn = true;
+                        this.roles = this.storageService.getUser().roles;
+                        this.authService.isLoggedIn = true;
+                        this.router.navigateByUrl('/admin').then(r => this.reloadPage())
+                        this.reloadPage();
+                    },
+                    error: err => {
+                        this.errorMessage = "Invalid email or password. Please check your credentials.";
+                        this.isLoginFailed = true;
+                        this.showError = true;
+                    }
+                }
+            );
         } else {
             this.authService.login(this.formData.controls.email.value, this.formData.controls.password.value).subscribe({
                     next: data => {
@@ -85,10 +80,11 @@ export class LoginPageComponent implements OnInit {
                         this.router.navigateByUrl('/job-listings').then(r => this.reloadPage())
                         this.reloadPage();
                     },
-                    error: err => {
-                        this.errorMessage = err.error.message;
-                        this.isLoginFailed = true;
-                    }
+                error: err => {
+                    this.errorMessage = "Invalid email or password. Please check your credentials.";
+                    this.isLoginFailed = true;
+                    this.showError = true;
+                }
                 }
             );
         }

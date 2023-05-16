@@ -23,12 +23,12 @@
                             Find Trainer
                         </a>
                     </li>
-                    <li class="nav-item" *ngIf="isLoggedIn===true && currentUser.isTrainer==true" >
+                    <li class="nav-item" *ngIf="isLoggedIn===true && currentUser.trainer==true" >
                         <a routerLink="/post-a-job" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                             Post your information
                         </a>
                     </li>
-<!--                    <li class="nav-item" *ngIf="isLoggedIn===true && currentUser.isTrainer==true">-->
+<!--                    <li class="nav-item" *ngIf="isLoggedIn===true && currentUser.trainer==true">-->
 <!--                        <a routerLink="/pricing" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">-->
 <!--                            Pricing-->
 <!--                        </a>-->
@@ -326,10 +326,10 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li class="nav-item">
-                                    <a *ngIf="currentUser.isTrainer==false" routerLink="/company-details" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                                    <a *ngIf="currentUser.trainer==false" routerLink="/company-details" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                                         Profile information
                                     </a>
-                                    <a *ngIf="currentUser.isTrainer==true" routerLink="/candidate-details" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                                    <a *ngIf="currentUser.trainer==true" routerLink="/candidate-details" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                                         Profile information
                                     </a>
                                     <a *ngIf="!authService.isAdmin" routerLink="/reservations" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
@@ -337,7 +337,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="default-btn nav-link" routerLink="/login" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="toggleClass()">
+                                    <a class="default-btn nav-link" routerLink="/login" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="logout()">
                                         Log out
                                     </a>
                                 </li>

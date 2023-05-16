@@ -31,28 +31,34 @@ export class AuthService {
         return this.userSubject.value;
     }
 
-    login(email: string, password: string): Observable<any> {
-        console.log(email + " " + password);
+    login(username: string, password: string): Observable<any> {
+        console.log(username + " " + password);
         // let token = uuidv4();
         // window.localStorage.removeItem('session-token');
         // window.localStorage.setItem('session-token', token);
-        return this.http.post('http://localhost:8099/v1/login', {
-                email,
+        return this.http.post('http://localhost:8099/v1/auth/login', {
+                username,
                 password
             },
             httpOptions);
     };
 
-    registration(firstName: string, lastName: string, email: string, password: string, isTrainer: boolean): Observable<any> {
+    registration(username: string, firstName: string, lastName: string, email: string, password: string, isTrainer: boolean): Observable<any> {
         console.log("email: " + email + "   password: " + password);
-        return this.http.post(`http://localhost:8099/v1/register`, {
-                    firstName,
-                    lastName,
-                    email,
-                    password,
-                    isTrainer
-                },
-            httpOptions);
+        const role = isTrainer ? 'trainer' : 'user';
+
+        return this.http.post(
+            `http://localhost:8099/v1/auth/register`,
+            {
+                username,
+                firstName,
+                lastName,
+                email,
+                password,
+                role: [role]  // Send role as an array
+            },
+            httpOptions
+        );
     }
 
     // logout() {

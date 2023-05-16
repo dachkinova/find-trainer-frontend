@@ -31,10 +31,13 @@
                             <label>Password</label>
                             <input type="password" class="form-control" placeholder="Password" name="password" formControlName="password" id="password">
                         </div>
-                        <div class="errors" *ngIf="showError===true" align="center" id="wrongCredentialsMessage">Wrong email or password</div>
-                        <div class="forgot-password-wrap">
-                            <a routerLink="/forgot-password" class="lost-your-password">Forgot password?</a>
-                        </div>
+                        <div class="errors" *ngIf="showError === true" align="center" id="wrongCredentialsMessage">{{ errorMessage }}</div>
+
+                        <!--                        <div class="errors" *ngIf="showError===true" align="center" id="wrongCredentialsMessage">Wrong email or password</div>-->
+<!--                        <div class="forgot-password-wrap">-->
+<!--                            <a routerLink="/forgot-password" class="lost-your-password">Forgot password?</a>-->
+<!--                        </div>-->
+
                         <button type="submit" (click)="toProfile()">Login</button>
                     </form>
                 </div>

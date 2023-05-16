@@ -24,6 +24,7 @@ import {PaymentPageComponent} from "./components/pages/payment/payment-page.comp
 import {FileUploadComponent} from "./components/file/image-upload/file-upload.component";
 import {ReservationsPageComponent} from "./components/pages/reservations-page/reservations-page.component";
 import {AdminPageComponent} from "./components/pages/admin-page/admin-page.component";
+import {AuthGuard} from "../service/auth.guard";
 
 const routes: Routes = [
     {path: '', component: MainHomeComponent},
@@ -31,7 +32,7 @@ const routes: Routes = [
     {path: 'image', component: FileUploadComponent},
     {path: 'job-listings', component: JobListingsPageComponent},
     {path: 'job-details', component: JobDetailsPageComponent},
-    {path: 'post-a-job', component: TrainerInfoPageComponent},
+    {path: 'post-a-job', component: TrainerInfoPageComponent, canActivate: [AuthGuard], data: { roles: ['ROLE_TRAINER'] }},
     {path: 'companies', component: CompaniesPageComponent},
     {path: 'company-details', component: ProfilePageComponent},
     {path: 'payment', component: PaymentPageComponent},
@@ -48,7 +49,7 @@ const routes: Routes = [
     {path: 'blog-details', component: BlogDetailsPageComponent},
     {path: 'contact', component: ContactPageComponent},
     {path: 'reservations', component: ReservationsPageComponent},
-    {path: 'admin', component: AdminPageComponent},
+    {path: 'admin', component: AdminPageComponent, canActivate: [AuthGuard], data: { roles: ['ROLE_ADMIN'] }},
     // Here add new pages component
 
     {path: '**', component: NotFoundComponent} // This line will remain down from the whole pages component list

@@ -24,6 +24,10 @@
                     <h2>Register</h2>
                     <form [formGroup]="formData">
                         <div class="form-group">
+                            <label>Username</label>
+                            <input type="text" class="form-control" placeholder="Username" formControlName="username" id="username">
+                        </div>
+                        <div class="form-group">
                             <label>First name</label>
                             <input type="text" class="form-control" placeholder="First name" formControlName="firstName" id="firstName">
                         </div>
@@ -51,6 +55,7 @@
                                 </select>
                             </div>
                         </div>
+                        <h3 style="color: red; margin-top: 20px; font-style: italic">{{this.errorMessage}}</h3>
                         <button type="submit" (click)="toProfile()">Register</button>
                     </form>
                 </div>

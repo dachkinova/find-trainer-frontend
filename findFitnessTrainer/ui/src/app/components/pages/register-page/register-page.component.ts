@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl} from "@angular/forms";
-import {Router} from "@angular/router";
-import {catchError, empty, of, throwError} from 'rxjs';
-import {AuthService} from "../../../../service/auth.service";
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl } from "@angular/forms";
+import { Router } from "@angular/router";
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
+import { AuthService } from "../../../../service/auth.service";
 
 @Component({
     selector: 'register-page',
@@ -17,6 +18,7 @@ export class RegisterPageComponent implements OnInit {
     isSignUpFailed = false;
     typeOfProfile = false;
     loginError: any;
+    errorMessage: string = ''; // Added variable to store error message
 
     get email() {
         return this.formData.get('email');
@@ -30,6 +32,10 @@ export class RegisterPageComponent implements OnInit {
         return this.formData.get('firstName');
     }
 
+    get username() {
+        return this.formData.get('username');
+    }
+
     get lastName() {
         return this.formData.get('lastName');
     }
@@ -37,12 +43,13 @@ export class RegisterPageComponent implements OnInit {
     constructor(
         private router: Router,
         private formBuilder: FormBuilder,
-        public authService: AuthService) {
-    }
+        public authService: AuthService
+    ) {}
 
     ngOnInit(): void {
         this.formData = this.formBuilder.group({
             firstName: new FormControl(''),
+            username: new FormControl(''),
             lastName: new FormControl(''),
             email: new FormControl(''),
             password: new FormControl('')
@@ -52,24 +59,34 @@ export class RegisterPageComponent implements OnInit {
     }
 
     toProfile() {
-        this.authService.registration(this.formData.controls.firstName.value,
-            this.formData.controls.lastName.value,
-            this.formData.controls.email.value,
-            this.formData.controls.password.value, this.typeOfProfile)
-            .pipe(catchError(error => {
-                if (error.status === 400) {
-                    console.log(error)
-                }
-                return throwError(error);
-            }))
-            .subscribe(data => {
-                    console.log(data)
+        this.authService
+            .registration(
+                this.formData.controls.username.value,
+                this.formData.controls.firstName.value,
+                this.formData.controls.lastName.value,
+                this.formData.controls.email.value,
+                this.formData.controls.password.value,
+                this.typeOfProfile
+            )
+            .pipe(
+                catchError(error => {
+                    console.log(error);
+                    this.errorMessage = error.error.message; // Assign error message to the variable
+                    return throwError(error);
+                })
+            )
+            .subscribe(
+                data => {
+                    console.log(data);
                     this.isSuccessful = true;
                     this.isSignUpFailed = false;
-                    this.router.navigateByUrl('/login').then(r => this.reloadPage())
+                    this.router.navigateByUrl('/login').then(r => this.reloadPage());
+                },
+                error => {
+                    console.log('An error occurred:', error);
                 }
-            )
-    };
+            );
+    }
 
     reloadPage(): void {
         window.location.reload();
@@ -83,21 +100,4 @@ export class RegisterPageComponent implements OnInit {
         }
         console.log(e.target.value);
     }
-
-    // toProfile() {
-    //     this.authService.registration(this.formData.controls.firstName.value, this.formData.controls.lastName.value,
-    //         this.formData.controls.email.value, this.formData.controls.password.value)
-    //         .pipe(
-    //             catchError(error => {
-    //                 this.showError = true
-    //                 this.isSignUpFailed = true;
-    //                 return empty();
-    //             })
-    //         )
-    //         .subscribe(res =>{ this.router.navigateByUrl('/login') }
-    //         );
-    //     this.isSuccessful = true;
-    //     this.isSignUpFailed = false;
-    // };
-
 }
