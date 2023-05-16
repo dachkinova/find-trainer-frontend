@@ -1,0 +1,68 @@
+<!-- Page Title -->
+<div class="inner-banner">
+    <div class="container">
+        <div class="inner-title text-right">
+            <h3>My reservations</h3>
+            <ul>
+                <li>
+                    <a routerLink="/">
+                        Home
+                    </a>
+                </li>
+                <li>My reservations</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="table-content" *ngIf="dataSource">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="index">
+            <th mat-header-cell *matHeaderCellDef> # </th>
+            <td mat-cell *matCellDef="let element; let i = index"> {{i + 1}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element?.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef> Date </th>
+            <td mat-cell *matCellDef="let element"> {{element?.date}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="hour">
+            <th mat-header-cell *matHeaderCellDef> Hour </th>
+            <td mat-cell *matCellDef="let element"> {{element?.hour}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="button2">
+            <th mat-header-cell *matHeaderCellDef> </th>
+            <td mat-cell *matCellDef="let element">
+                <div class="button-container">
+                    <mat-checkbox style="margin-right: 10px;" *ngIf="!element.isChecked && (!element.isConfirmed && !element.isDeclined)" [(ngModel)]="element.isNotReliable">Client not reliable</mat-checkbox>
+                    <button *ngIf="!element.isChecked && (!element.isConfirmed && !element.isDeclined)" mat-button color="decline" (click)="confirmDecline(element)">Decline</button>
+                </div>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="button">
+            <th mat-header-cell *matHeaderCellDef> </th>
+            <td mat-cell *matCellDef="let element">
+                <div class="button-container">
+                    <button *ngIf="!element.isChecked && (!element.isConfirmed && !element.isDeclined)" mat-button color="accept" (click)="confirmAccept(element)">Completed</button>
+                </div>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+            [ngClass]="{
+        'styles-green': row.isConfirmed && !row.isDeclined,
+        'styles-red': !row.isConfirmed && row.isDeclined,
+        '': !row.isConfirmed && !row.isDeclined}">
+        </tr>
+
+    </table>
+</div>

@@ -1,0 +1,51 @@
+{
+  "name": "jend",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "^14.1.0",
+    "@angular/cdk": "^14.2.7",
+    "@angular/common": "^14.1.0",
+    "@angular/compiler": "^14.1.0",
+    "@angular/core": "^14.1.0",
+    "@angular/forms": "^14.1.0",
+    "@angular/material": "^14.2.7",
+    "@angular/platform-browser": "^14.1.0",
+    "@angular/platform-browser-dynamic": "^14.1.0",
+    "@angular/router": "^14.1.0",
+    "animate.css": "^4.1.1",
+    "bootstrap": "^5.2.0",
+    "ng2-sticky-nav": "^10.0.0",
+    "ngx-accordion": "^0.0.17",
+    "ngx-editor": "^15.0.0",
+    "ngx-owl-carousel-o": "^14.0.1",
+    "ngx-scrolltop": "^4.2.0",
+    "ngx-smart-modal": "^7.4.1",
+    "ngx-tabset": "^2.2.0",
+    "rxjs": "~7.5.0",
+    "tslib": "^2.3.0",
+    "uuid": "^9.0.0",
+    "zone.js": "~0.11.4"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^14.1.1",
+    "@angular/cli": "^13.0.0",
+    "@angular/compiler-cli": "^14.1.0",
+    "@types/jasmine": "~4.0.0",
+    "@types/uuid": "^9.0.1",
+    "jasmine-core": "~4.2.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.1.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.0.0",
+    "typescript": "~4.7.2"
+  }
+}

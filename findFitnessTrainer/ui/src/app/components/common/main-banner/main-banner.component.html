@@ -1,0 +1,95 @@
+<div class="banner-area">
+    <div class="container">
+        <div class="banner-content">
+            <h1>Searching For A Sports Trainer? <br>Find the Perfect One For You</h1>
+            <div class="banner-form">
+                <form>
+                    <div class="row">
+                        <!--                        <div class="col-lg-4 col-md-4">-->
+                        <!--                            <div class="form-group">-->
+                        <!--                                <input class="form-control" type="text" placeholder="City">-->
+                        <!--                                <i class="ri-map-pin-line"></i>-->
+                        <!--                            </div>-->
+                        <!--                        </div>-->
+                        <div class="col-lg-5 col-md-5">
+                            <div class="form-group">
+                                <input class="form-control" type="text" placeholder="Trainer name or surname">
+                                <i class="ri-search-line"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <div class="form-group">
+                                <select class="form-select form-control">
+                                    <option value="" disabled selected>City</option>
+                                    <option *ngFor="let city of cities" value="{{city.city}}">{{city.city}}</option>
+                                </select>
+                                <i class="ri-map-pin-line"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <div class="form-group">
+                                <select class="form-select form-control">
+                                    <option value="" disabled selected>Category</option>
+                                    <option *ngFor="let sport of sports" value="{{sport}}">{{sport}}</option>
+                                </select>
+                                <i class="ri-list-check-2"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3">
+                            <button type="submit" class="submit-btn">Find Trainer</button>
+                        </div>
+                    </div>
+<!--                    <div class="col-lg-3 col-md-3" *ngIf="currentUser.isLoggedIn==false">-->
+<!--                        <button routerLink="/register" class="submit-btn">Register now</button>-->
+<!--                    </div>-->
+                </form>
+            </div>
+
+<!--            <div class="popular-search">-->
+<!--                <span class="title">Popular Search: </span>-->
+<!--                <a routerLink="/job-listing">Fitness</a>-->
+<!--                <a routerLink="/job-listing">Crossfit</a>-->
+<!--                <a routerLink="/job-listing">Yoga</a>-->
+<!--                <a routerLink="/job-listing">Basketball</a>-->
+<!--                <a routerLink="/job-listing">Volleyball</a>-->
+<!--                <a routerLink="/job-listing">Group training</a>-->
+<!--                <a routerLink="/job-listing">Dancing</a>-->
+<!--            </div>-->
+        </div>
+    </div>
+    <div class="banner-shapes">
+        <div class="shape1">
+            <img src="assets/images/banner/barbell.png" style="width: 80px; opacity: 0.5;" alt="user">
+        </div>
+        <div class="shape2">
+            <img src="assets/images/banner/fitball.png" style="width: 80px; opacity: 0.3;" alt="shape">
+        </div>
+<!--        <div class="shape3">-->
+<!--            <img src="assets/images/banner/kayak.png" style="width: 80px;" alt="user">-->
+<!--        </div>-->
+        <div class="shape4">
+            <img src="assets/images/banner/medal.png" style="width: 100px; opacity: 0.5;" alt="shape">
+        </div>
+        <div class="shape5">
+            <img src="assets/images/banner/ping-pong.png" style="width: 80px; opacity: 0.3;" alt="shape">
+        </div>
+        <div class="shape6">
+            <img src="assets/images/banner/push-up.png" style="width: 60px; opacity: 0.5;" alt="shape">
+        </div>
+        <div class="shape7">
+            <img src="assets/images/banner/running.png" style="width: 80px; opacity: 0.3;" alt="shape">
+        </div>
+        <div class="shape8">
+            <img src="assets/images/banner/sport%20(1).png" style="width: 80px; opacity: 0.3;" alt="user">
+        </div>
+<!--        <div class="shape9">-->
+<!--            <img src="assets/images/banner/trophy.png" alt="user">-->
+<!--            <div class="other-into-content">-->
+<!--                <img src="assets/images/banner/shape5.jpg" alt="shape">-->
+<!--            </div>-->
+<!--        </div>-->
+        <div class="shape10">
+            <img src="assets/images/banner/trophy.png" style="width: 120px; opacity: 0.5;" alt="shape">
+        </div>
+    </div>
+</div>

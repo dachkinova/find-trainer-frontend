@@ -1,0 +1,157 @@
+<!-- Page Title -->
+<div class="inner-banner">
+    <div class="container">
+        <div class="inner-title text-center">
+            <h3>Trainer Details</h3>
+            <ul>
+                <li>
+                    <a routerLink="/">
+                        Home
+                    </a>
+                </li>
+                <li>Trainer Details</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Trainer Details -->
+<div class="candidate-details-area pt-100 pb-sm-45">
+    <div class="container">
+        <div class="row" style="justify-content: center">
+            <div class="col-lg-3 col-md-12">
+                <div class="candidate-details-sidebar">
+                    <div class="profile">
+                        <img src="assets/images/candidates/candidate7.jpg" class="main-image" alt="candidates-image">
+                        <div class="title">
+                            <h3>{{this.currentTrainer.userId.firstName}} {{this.currentTrainer.userId.lastName}}</h3>
+                        </div>
+                        <p>Sport trainer</p>
+                        <div class="rating">
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                        </div>
+                        <ul class="social-icon">
+                            <li>
+                                <a href="https://www.facebook.com/" target="_blank">
+                                    <i class="ri-facebook-fill"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.instagram.com/" target="_blank">
+                                    <i class="ri-instagram-fill"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://twitter.com/" target="_blank">
+                                    <i class="ri-twitter-fill"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.linkedin.com/" target="_blank">
+                                    <i class="ri-linkedin-fill"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="info">
+                        <h3>Contact Info</h3>
+                        <ul>
+                            <li>
+                                <span>Gender</span>
+                                {{this.currentTrainer.gender}}
+                            </li>
+                            <li>
+                                <span>Location</span>
+                                <a href="https://www.google.bg/maps/place/Sofia/@42.6953468,23.1838624,11z/data=!3m1!4b1!4m6!3m5!1s0x40aa8682cb317bf5:0x400a01269bf5e60!8m2!3d42.6977082!4d23.3218675!16zL20vMGZ0ang?hl=en&authuser=0"
+                                   target="_blank">{{currentTrainer.city}}</a>
+                            </li>
+                            <li>
+                                <span>Email</span>
+                                <a href="mailto:hello@henry.com">{{this.currentTrainer.userId.email}}</a>
+                            </li>
+                            <li>
+                                <span>Phone</span>
+                                <a href="">{{this.currentTrainer.telephone}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+                <div class="candidate-details-desc">
+                    <h4>About</h4>
+                    <div [innerHTML]="this.currentTrainer.about | htmldecoder"></div>
+                    <hr>
+                    <h4>Photos</h4>
+                    <div class="row" style="justify-content: center">
+                        <div class="col-lg-4 col-sm-4 col-md-4">
+                            <div class="image">
+                                <img src="assets/images/blog/blog-img1.jpg" alt="blog-image">
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-4 col-md-4">
+                            <div class="image">
+                                <img src="assets/images/blog/blog-img2.jpg" alt="blog-image">
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-4 col-md-4">
+                            <div class="image">
+                                <img src="assets/images/blog/blog-img3.jpg" alt="blog-image">
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <h3>Experience:</h3>
+                    <p>{{this.currentTrainer.experience}}</p>
+                    <hr>
+                    <h3>Category</h3>
+                    <ul class="candidate-skills">
+                        <li>{{this.currentTrainer.category}}</li>
+                    </ul>
+                    <hr>
+                    <h3>Type of training</h3>
+                    <ul class="candidate-skills">
+                        <li>{{this.currentTrainer.typeOfTraining}}</li>
+                    </ul>
+                    <hr>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-12">
+                <div class="other-candidates-list" [class.disabled]="!reliable">
+                    <h3>Make a reservation</h3>
+                    <mat-form-field appearance="fill" class="form-field" [class.disabled]="!reliable">
+                        <mat-label>Choose a date</mat-label>
+                        <input matInput [matDatepicker]="picker" [min]="minDate" [value]="selectedDate" (dateChange)="chosenDate($event)" [disabled]="!reliable">
+                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle matIconSuffix [for]="picker" [disabled]="!reliable"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" class="form-field" [class.disabled]="!reliable">
+                        <mat-label>Pick hour:</mat-label>
+                        <mat-select [(ngModel)]="selectedHour" (ngModelChange)="setHoursData($event)" [disabled]="!reliable">
+                            <mat-option *ngFor="let hour of hoursAvailable" [value]="hour">
+                                {{hour}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <div>
+                        <button type="submit" class="submit-btn" (click)="createReservation()" [disabled]="!reliable || bookingStatus">
+                            Make a reservation
+                        </button>
+                    </div>
+                    <div class="disabled-overlay" *ngIf="!reliable"></div>
+                    <h4 class="disabled-message" *ngIf="!reliable" style="color: red">
+                        You cannot make reservations because you are marked as not reliable.
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-write-a-review></app-write-a-review>
+<app-testimonials></app-testimonials>
+

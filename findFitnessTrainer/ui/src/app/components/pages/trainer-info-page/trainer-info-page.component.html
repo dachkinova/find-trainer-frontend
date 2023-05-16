@@ -1,0 +1,346 @@
+<!-- Page Title -->
+<div class="inner-banner" xmlns="http://www.w3.org/1999/html">
+    <div class="container">
+        <div class="inner-title text-center">
+            <h3>Post your information</h3>
+            <ul>
+                <li>
+                    <a routerLink="/">
+                        Home
+                    </a>
+                </li>
+                <li>Submit info</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Post A Job -->
+<div class="post-a-job-area ptb-100" *ngIf="clickedButton==false && clickedButtonToPayment==false">
+    <div class="container">
+        <div class="post-a-job-form">
+
+            <form [formGroup]="formData">
+                <div class="row">
+                    <!--                    <div class="col-lg-12 col-md-12">-->
+                    <!--                        <div class="form-group">-->
+                    <!--                            <label>Job Title <span>*</span></label>-->
+                    <!--                            <input type="text" class="form-control">-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+                    <div class="col-lg-12 col-md-12">
+                        <div class="form-group">
+                            <label>About <span>*</span></label>
+                            <div class="NgxEditor__Wrapper">
+                                <ngx-editor-menu [editor]="editor" [toolbar]="toolbar">
+                                </ngx-editor-menu>
+                                <ngx-editor [editor]="editor" [placeholder]="'Type here...'" formControlName="about"></ngx-editor>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="form-group">
+                            <label>Category <span>*</span></label>
+                            <select class="form-select" (change)="changeCategory($event)">
+                                <option value="" disabled selected>Category</option>
+                                <option *ngFor="let sport of sports" value="{{sport}}">{{sport}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!--                    <div id="rolesDropdown" class="form-select">-->
+                    <!--                        <input type="checkbox" id="tgl">-->
+                    <!--                        <div *ngFor="let sport of sports" >-->
+                    <!--                            <input  type="checkbox"  name="role" value="{{sport}}" id="{{sport}}">-->
+                    <!--                            <label for="{{sport}}">{{sport}}</label>-->
+                    <!--                        </div>-->
+
+                    <!--                        <ul>-->
+                    <!--                            <li><label for="tgl">Изберете роля:</label></li>-->
+                    <!--                            <li *ngFor="let sport of sports"><label>{{sport}}</label></li>-->
+                    <!--                        </ul>-->
+                    <!--                    </div>-->
+
+                    <div class="col-lg-6 col-md-6">
+                        <div class="form-group" (change)="changeTypeOfTraining($event)">
+                            <label>Type of training <span>*</span></label>
+                            <select class="form-select" formControlName="typeOfTraining">
+                                <option value="In person">In person</option>
+                                <option value="Online">Online</option>
+                                <option value="In person and online">In person and online</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!--                    <div class="col-lg-6 col-md-6">-->
+                    <!--                        <div class="form-group">-->
+                    <!--                            <label>Tag</label>-->
+                    <!--                            <input type="text" class="form-control">-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+                    <div class="col-lg-6 col-md-6">
+                        <div class="form-group">
+                            <label>Gender <span>*</span></label>
+                            <select class="form-select" (change)="changeGender($event)">
+                                <option value="select" disabled selected>Gender</option>
+                                <option value="female">Female</option>
+                                <option value="male">Male</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!--                    <div class="col-lg-6 col-md-6">-->
+                    <!--                        <div class="form-group">-->
+                    <!--                            <label>Job Apply Type <span>*</span></label>-->
+                    <!--                            <select class="form-select">-->
+                    <!--                                <option selected>Internal</option>-->
+                    <!--                                <option value="1">External URL</option>-->
+                    <!--                                <option value="2">By Email</option>-->
+                    <!--                                <option value="3">Call To Apply</option>-->
+                    <!--                            </select>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+                    <!--                    <div class="col-lg-6 col-md-6">-->
+                    <!--                        <div class="form-group">-->
+                    <!--                            <label>Salary Type <span>*</span></label>-->
+                    <!--                            <select class="form-select">-->
+                    <!--                                <option selected>Monthly</option>-->
+                    <!--                                <option value="1">Weekly</option>-->
+                    <!--                                <option value="2">Daily</option>-->
+                    <!--                                <option value="3">Hourly</option>-->
+                    <!--                                <option value="4">Yearly</option>-->
+                    <!--                            </select>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+                    <!--                    <div class="col-lg-6 col-md-6">-->
+                    <!--                        <div class="form-group">-->
+                    <!--                            <label>Min. Salary <span>*</span></label>-->
+                    <!--                            <input type="text" class="form-control">-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+                    <!--                    <div class="col-lg-6 col-md-6">-->
+                    <!--                        <div class="form-group">-->
+                    <!--                            <label>Max. Salary <span>*</span></label>-->
+                    <!--                            <input type="text" class="form-control">-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+                    <div class="col-lg-6 col-md-6">
+                        <div class="form-group">
+                            <label>Experience <span>*</span></label>
+                            <input type="text" class="form-control" placeholder="Years of experience" formControlName="experience" id="experience">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="form-group">
+                            <label>Telephone <span>*</span></label>
+                            <input type="text" class="form-control" placeholder="Telephone" formControlName="telephone" id="telephone">
+                        </div>
+                    </div>
+                    <!--                    <div class="col-lg-6 col-md-6">-->
+                    <!--                        <div class="form-group">-->
+                    <!--                            <label>Career Level <span>*</span></label>-->
+                    <!--                            <select class="form-select">-->
+                    <!--                                <option selected>Manager</option>-->
+                    <!--                                <option value="1">Officer</option>-->
+                    <!--                                <option value="2">Student</option>-->
+                    <!--                                <option value="3">Executive</option>-->
+                    <!--                                <option value="4">Others</option>-->
+                    <!--                            </select>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+                    <!--                    <div class="col-lg-6 col-md-6">-->
+                    <!--                        <div class="form-group">-->
+                    <!--                            <label>Qualification <span>*</span></label>-->
+                    <!--                            <select class="form-select">-->
+                    <!--                                <option selected>Certificate</option>-->
+                    <!--                                <option value="1">Associate Degree</option>-->
+                    <!--                                <option value="2">Bachelor Degree</option>-->
+                    <!--                                <option value="3">Master’s Degree</option>-->
+                    <!--                                <option value="4">Doctorate Degree</option>-->
+                    <!--                            </select>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+                    <!--                    <div class="col-lg-6 col-md-6">-->
+                    <!--                        <div class="form-group">-->
+                    <!--                            <label>Introduction Video URL <span>*</span></label>-->
+                    <!--                            <input type="text" class="form-control">-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+                    <div class="col-lg-6 col-md-6">
+                        <div class="form-group">
+                            <label>Certifications <span>*</span></label>
+                            <input type="text" class="form-control" placeholder="Certifications" formControlName="certifications">
+                        </div>
+                    </div>
+                    <!--                    <div class="col-lg-12 col-md-12">-->
+                    <!--                        <div class="form-group">-->
+                    <!--                            <label>Application Deadline Date <span>*</span></label>-->
+                    <!--                            <input type="date" class="form-control">-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+                    <!--                    <div class="col-lg-6 col-md-6">-->
+                    <!--                        <div class="form-group">-->
+                    <!--                            <label>Friendly Address <span>*</span></label>-->
+                    <!--                            <input type="text" class="form-control">-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+                    <div class="col-lg-6 col-md-6">
+                        <div class="form-group">
+                            <label>Location <span>*</span></label>
+                            <select class="form-select" (change)="changeCity($event)">
+                                <!--                                    formControlName="town">-->
+                                <option value="" disabled selected>City</option>
+                                <option *ngFor="let city of cities" value="{{city.city}}">{{city.city}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="form-group">
+                            <label>Indicative price per hour<span>*</span></label>
+                            <input type="text" class="form-control" placeholder="Price in BGN" formControlName="price">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="form-group">
+                    <label>Upload images for your profile:<span>*</span></label>
+                    <!--                    <div class="col-lg-12 col-md-12">-->
+                    <!--                        <div class="form-group">-->
+                    <!--                            <label>Images <span>*</span></label>-->
+                    <!--                            <input type="file" id="img" name="img" accept="image/*">-->
+                    <!--                            -->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+                    <app-file-upload></app-file-upload>
+                    <p>Maximum file size: 2 MB</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12">
+                        <button type="submit" class="default-btn" (click)="nextButton()">Submit & Preview</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- Trainer Details -->
+<div class="candidate-details-area pt-100 pb-sm-45" *ngIf="clickedButton==true && clickedButtonToPayment==false">
+    <div class="container">
+        <div class="row" style="justify-content: center">
+            <div class="col-lg-3 col-md-12">
+                <div class="candidate-details-sidebar">
+                    <div class="profile">
+                        <img src="assets/images/candidates/candidate7.jpg" class="main-image" alt="candidates-image">
+                        <div class="title">
+                            <h3>{{currentUser.firstName}} {{currentUser.lastName}}</h3>
+                        </div>
+                        <p>Sport trainer</p>
+                        <div class="rating">
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                        </div>
+                        <ul class="social-icon">
+                            <li>
+                                <a href="https://www.facebook.com/" target="_blank">
+                                    <i class="ri-facebook-fill"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.instagram.com/" target="_blank">
+                                    <i class="ri-instagram-fill"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://twitter.com/" target="_blank">
+                                    <i class="ri-twitter-fill"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.linkedin.com/" target="_blank">
+                                    <i class="ri-linkedin-fill"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="info">
+                        <h3>Contact Info</h3>
+                        <ul>
+                            <li>
+                                <span>Gender</span>
+                                {{this.gender}}
+                            </li>
+                            <li>
+                                <span>Location</span>
+                                <a href="https://www.google.bg/maps/place/Sofia/@42.6953468,23.1838624,11z/data=!3m1!4b1!4m6!3m5!1s0x40aa8682cb317bf5:0x400a01269bf5e60!8m2!3d42.6977082!4d23.3218675!16zL20vMGZ0ang?hl=en&authuser=0"
+                                   target="_blank">{{this.city}}</a>
+                            </li>
+                            <li>
+                                <span>Email</span>
+                                <a href="mailto:hello@henry.com">{{currentUser.email}}</a>
+                            </li>
+                            <li>
+                                <span>Phone</span>
+                                <a href="">{{this.formData.controls.telephone.value}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+                <div class="candidate-details-desc">
+                    <h4>About</h4>
+                    <div [innerHTML]="this.formData.controls.about.value | htmldecoder"></div>
+                    <hr>
+                    <h4>Photos</h4>
+                    <div class="row" style="justify-content: center">
+
+                        <div *ngFor="let image of imageInfos | async" class="col-lg-4 col-sm-4 col-md-4">
+                            <div class="image">
+                                <img src="{{ image.url }}" alt="{{ image.name }}" height="80px"/>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <h3>Experience:</h3>
+                    <p>{{this.formData.controls.experience.value}}</p>
+                    <hr>
+                    <h3>Category</h3>
+                    <ul class="candidate-skills">
+                        <li>{{this.category}}</li>
+                    </ul>
+                    <hr>
+                    <h3>Type of training</h3>
+                    <ul class="candidate-skills">
+                        <li>{{this.formData.controls.typeOfTraining.value}}</li>
+                    </ul>
+                    <h3>Price per hour</h3>
+                    <ul class="candidate-skills">
+                        <li>{{this.formData.controls.price.value}} BGN</li>
+                    </ul>
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<div *ngIf="clickedButtonToPayment == true">-->
+<!--    <app-payment></app-payment>-->
+<!--</div>-->
+
+
+<div class="button-wrapper" *ngIf="clickedButton==true">
+    <div class="col-lg-3 col-md-3">
+        <button type="submit" class="submit-btn" (click)="goBackToEdit()">Edit your profile</button>
+    </div>
+    <div class="col-lg-3 col-md-3">
+        <button type="submit" class="submit-btn" (click)="postTrainerInformation()">Submit</button>
+    </div>
+<!--    <div class="col-lg-3 col-md-3 " *ngIf="clickedButton==true">-->
+<!--        <button type="submit" class="submit-btn" (click)="toPayment()">Pay</button>-->
+<!--    </div>-->
+    <!--    <div class="col-lg-3 col-md-3 " *ngIf="clickedButton==true" >-->
+    <!--        <button type="submit" class="submit-btn" (click)="postTrainerInformation()">Post your profile</button>-->
+    <!--    </div>-->
+</div>
+
+

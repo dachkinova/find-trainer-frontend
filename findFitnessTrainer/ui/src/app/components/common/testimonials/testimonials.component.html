@@ -1,0 +1,78 @@
+<div class="testimonials-area ptb-100">
+    <div class="container">
+        <div class="section-title">
+            <h2>Reviews From Clients</h2>
+            <div class="bar ms-auto me-auto"></div>
+            <p *ngIf="reviews!=''" class="ms-auto me-auto">Here are reviews from clients:</p>
+            <p *ngIf="reviews==''" class="ms-auto me-auto">There are still no reviews for this trainer. Be the first one!</p>
+        </div>
+        <div class="testimonials-slides" *ngFor="let review of reviews">
+<!--            <owl-carousel-o [options]="testimonialsSlides">-->
+<!--                <ng-template carouselSlide>-->
+                    <div class="testimonials-item carouselSlide">
+                        <div class="content">
+                            <div class="image">
+                                <img src="assets/images/users/user1.jpg" alt="user">
+                                <div class="line1"></div>
+                                <div class="line2"></div>
+                            </div>
+                            <h3>{{review.userId.firstName}} {{review.userId.lastName}}</h3>
+                            <span>IT Manager</span>
+                        </div>
+                        <p>{{review.review}}</p>
+                        <div class="rating">
+
+                            <i *ngIf="review.rating>=1" class="ri-star-fill"></i>
+                            <i *ngIf="review.rating>=2" class="ri-star-fill"></i>
+                            <i *ngIf="review.rating>=3" class="ri-star-fill"></i>
+                            <i *ngIf="review.rating>=4" class="ri-star-fill"></i>
+                            <i *ngIf="review.rating==5" class="ri-star-fill"></i>
+                        </div>
+                    </div>
+<!--                </ng-template>-->
+<!--                <ng-template carouselSlide>-->
+<!--                    <div class="testimonials-item carouselSlide">-->
+<!--                        <div class="content">-->
+<!--                            <div class="image">-->
+<!--                                <img src="assets/images/users/user2.jpg" alt="user">-->
+<!--                                <div class="line1"></div>-->
+<!--                                <div class="line2"></div>-->
+<!--                            </div>-->
+<!--                            <h3>Camelia Rose</h3>-->
+<!--                            <span>Digital Marketer</span>-->
+<!--                        </div>-->
+<!--                        <p>We collect reviews from our users so you can get an honest opinion of what an experience honest with our webebsite are really like. We collect reviews from our users so you can get an honest opinion of what an here lorem experience with.</p>-->
+<!--                        <div class="rating">-->
+<!--                            <i class="ri-star-fill"></i>-->
+<!--                            <i class="ri-star-fill"></i>-->
+<!--                            <i class="ri-star-fill"></i>-->
+<!--                            <i class="ri-star-fill"></i>-->
+<!--                            <i class="ri-star-fill"></i>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </ng-template>-->
+<!--                <ng-template carouselSlide>-->
+<!--                    <div class="testimonials-item carouselSlide">-->
+<!--                        <div class="content">-->
+<!--                            <div class="image">-->
+<!--                                <img src="assets/images/users/user3.jpg" alt="user">-->
+<!--                                <div class="line1"></div>-->
+<!--                                <div class="line2"></div>-->
+<!--                            </div>-->
+<!--                            <h3>John Carter</h3>-->
+<!--                            <span>Ui/Ux Designer</span>-->
+<!--                        </div>-->
+<!--                        <p>We collect reviews from our users so you can get an honest opinion of what an experience honest with our webebsite are really like. We collect reviews from our users so you can get an honest opinion of what an here lorem experience with.</p>-->
+<!--                        <div class="rating">-->
+<!--                            <i class="ri-star-fill"></i>-->
+<!--                            <i class="ri-star-fill"></i>-->
+<!--                            <i class="ri-star-fill"></i>-->
+<!--                            <i class="ri-star-fill"></i>-->
+<!--                            <i class="ri-star-fill"></i>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </ng-template>-->
+<!--            </owl-carousel-o>-->
+        </div>
+    </div>
+</div>

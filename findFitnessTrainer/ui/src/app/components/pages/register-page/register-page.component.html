@@ -1,0 +1,60 @@
+<!-- Page Title -->
+<div class="inner-banner">
+    <div class="container">
+        <div class="inner-title text-center">
+            <h3>My Account</h3>
+            <ul>
+                <li>
+                    <a routerLink="/">
+                        Home
+                    </a>
+                </li>
+                <li>Login/Register</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- My Account -->
+<div class="profile-authentication-area ptb-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-12">
+                <div class="register-form">
+                    <h2>Register</h2>
+                    <form [formGroup]="formData">
+                        <div class="form-group">
+                            <label>First name</label>
+                            <input type="text" class="form-control" placeholder="First name" formControlName="firstName" id="firstName">
+                        </div>
+                        <div class="form-group">
+                            <label>Last name</label>
+                            <input type="text" class="form-control" placeholder="Last name" formControlName="lastName" id="lastName">
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" class="form-control" placeholder="Email" formControlName="email" id="email">
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" class="form-control" placeholder="Password" formControlName="password" id="password">
+                        </div>
+                        <p class="description">The password should be at least eight characters long. To make it stronger, use upper and lower case letters, numbers, and symbols like ! " ? $ % ^ & )</p>
+                        <hr>
+                        <div class="col-lg-6 col-md-6">
+                            <div class="form-group">
+                                <label>Type of profile</label>
+                                <select class="form-select" (change)="changeTypeOfProfile($event)">
+                                    <option value="select" disabled selected>Select type of profile</option>
+                                    <option value="client">Client profile</option>
+                                    <option value="trainer">Trainer profile</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" (click)="toProfile()">Register</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

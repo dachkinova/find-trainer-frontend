@@ -1,0 +1,52 @@
+<div class="jobs-area ptb-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-12">
+                <h1 style="margin-bottom: 70px; margin-top: 70px; background-color: #d2f8d2; text-align: center; font-size: 36px; color: #555; padding: 20px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+                    Trainer Profiles<br>
+                    <span style="font-size: 24px; color: #888;">Waiting for Confirmation</span>
+                </h1>
+                <div *ngIf="trainersData!=undefined">
+                    <div class="row" *ngFor="let trainer of filterData">
+                        <div class="col-lg-12 col-sm-6 col-md-6" (click)="toTrainerProfile(trainer.userId.id)">
+                            <div class="job-card">
+                                <div class="content">
+                                    <div class="job-image">
+                                        <a routerLink="/job-details">
+                                            <img src="assets/images/job/job1.jpg" alt="job-image">
+                                        </a>
+                                    </div>
+                                    <h3><a routerLink="/job-details"></a>{{trainer.userId.firstName}} {{trainer.userId.lastName}}</h3>
+                                    <ul class="job-list1">
+                                        <li><i class="ri-menu-unfold-fill"></i>{{trainer.category}}</li>
+                                        <li><i class="ri-time-line"></i> 2 Week Ago</li>
+                                    </ul>
+                                    <span><i class="ri-map-pin-line"></i>{{trainer.town}}</span>
+                                </div>
+                                <div class="job-sub-content">
+                                    <ul class="job-list2">
+                                        <li class="time">{{trainer.typeOfTraining}}</li>
+                                    </ul>
+                                    <div *ngIf="trainer.price!==null" class="price">{{trainer.price}}<span> BGN /Per Hour</span></div>
+                                </div>
+                                <button class="bookmark-btn"><i class="ri-bookmark-line"></i></button>
+                                <div class="button-container">
+                                    <div>
+                                        <button mat-fab class="done_button" style="margin-right: 20px;" aria-label="Done icon" (click)="confirmAccept(trainer.userId.id); $event.stopPropagation()">
+                                            <mat-icon>done_outline</mat-icon>
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <button mat-fab color="warn" aria-label="Delete icon" (click)="confirmDecline(trainer.userId.id); $event.stopPropagation()">
+                                            <mat-icon>delete</mat-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

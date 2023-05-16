@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="input-container">
+        <div class="input">
+            <div class="inputbox">
+                <div class="form-group">
+                    <textarea type="text" class="reviewinp" placeholder="Write a review" formControlName="review" id="review" (change)="getReview($event)"></textarea>
+                </div>
+            </div>
+            <form>
+                <div class="rating form-group">
+                    <input type='radio' hidden name='rate' id='5' data-idx='0' (change)="onChange($event)">
+                    <label for='5'><span>one of the best!</span></label>
+
+                    <input type='radio' hidden name='rate' id='4' data-idx='1' (change)="onChange($event)">
+                    <label for='4'><span>amazing</span></label>
+
+                    <input type='radio' hidden name='rate' id='3' data-idx='2' (change)="onChange($event)">
+                    <label for='3'><span>interesting...</span></label>
+
+                    <input type='radio' hidden name='rate' id='2' data-idx='3' (change)="onChange($event)">
+                    <label for='2'><span>worth something</span></label>
+
+                    <input type='radio' hidden name='rate' id='1' data-idx='4' (change)="onChange($event)">
+                    <label for='1'><span>don't waste your time</span></label>
+                </div>
+            </form>
+            <div class="submitbtn">
+                <button class="submit" (click)="sendReview()">Submit Review</button>
+            </div>
+        </div>
+    </div>
+</div>

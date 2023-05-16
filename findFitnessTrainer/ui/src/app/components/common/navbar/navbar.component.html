@@ -1,0 +1,351 @@
+<div class="navbar-area" stickyClass="sticky-box-shadow" ngStickyNav>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" [class.active]="classApplied">
+            <a class="navbar-brand" routerLink="/">
+                <!--                <img src="assets/images/logo.png" alt="logo">-->
+            </a>
+            <button class="navbar-toggler" type="button" (click)="toggleClass()">
+                <span class="burger-menu">
+                    <span class="top-bar"></span>
+                    <span class="middle-bar"></span>
+                    <span class="bottom-bar"></span>
+                </span>
+            </button>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav">
+                    <li class="nav-item" *ngIf="isLoggedIn===false">
+                        <a routerLink="/" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                            Home
+                        </a>
+                    </li>
+                    <li class="nav-item" *ngIf="isLoggedIn===true">
+                        <a routerLink="/job-listings" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                            Find Trainer
+                        </a>
+                    </li>
+                    <li class="nav-item" *ngIf="isLoggedIn===true && currentUser.isTrainer==true" >
+                        <a routerLink="/post-a-job" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                            Post your information
+                        </a>
+                    </li>
+<!--                    <li class="nav-item" *ngIf="isLoggedIn===true && currentUser.isTrainer==true">-->
+<!--                        <a routerLink="/pricing" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">-->
+<!--                            Pricing-->
+<!--                        </a>-->
+<!--                    </li>-->
+<!--                    <li class="nav-item">-->
+<!--                        <a href="javascript:void(0)" class="dropdown-toggle nav-link">-->
+<!--                            Companies-->
+<!--                        </a>-->
+<!--                        <ul class="dropdown-menu">-->
+<!--                            &lt;!&ndash;                            <li class="nav-item">&ndash;&gt;-->
+<!--                            &lt;!&ndash;                                <a routerLink="/companies" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">&ndash;&gt;-->
+<!--                            &lt;!&ndash;                                    Companies List&ndash;&gt;-->
+<!--                            &lt;!&ndash;                                </a>&ndash;&gt;-->
+<!--                            &lt;!&ndash;                            </li>&ndash;&gt;-->
+<!--                            <li class="nav-item">-->
+<!--                                <a routerLink="/company-details" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">-->
+<!--                                    Client profile-->
+<!--                                </a>-->
+<!--                            </li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
+<!--                    <li class="nav-item">-->
+<!--                        <a href="javascript:void(0)" class="dropdown-toggle nav-link">-->
+<!--                            Candidates-->
+<!--                        </a>-->
+<!--                        <ul class="dropdown-menu">-->
+<!--                            &lt;!&ndash;                            <li class="nav-item">&ndash;&gt;-->
+<!--                            &lt;!&ndash;                                <a routerLink="/candidates" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">&ndash;&gt;-->
+<!--                            &lt;!&ndash;                                    Candidates List&ndash;&gt;-->
+<!--                            &lt;!&ndash;                                </a>&ndash;&gt;-->
+<!--                            &lt;!&ndash;                            </li>&ndash;&gt;-->
+<!--                            <li class="nav-item">-->
+<!--                                <a routerLink="/candidate-details" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">-->
+<!--                                    Trainer profile-->
+<!--                                </a>-->
+<!--                            </li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
+<!--                    <li class="nav-item">-->
+<!--                        <a href="javascript:void(0)" class="dropdown-toggle nav-link">-->
+<!--                            Pages-->
+<!--                        </a>-->
+<!--                        <ul class="dropdown-menu">-->
+<!--                            <li class="nav-item">-->
+<!--                                <a routerLink="/candidate-details" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">-->
+<!--                                    Trainer profile-->
+<!--                                </a>-->
+<!--                            </li>-->
+<!--                            <li class="nav-item">-->
+<!--                                <a routerLink="/about" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">-->
+<!--                                    About Us-->
+<!--                                </a>-->
+<!--                            </li>-->
+<!--                            <li class="nav-item">-->
+<!--                                <a routerLink="/post-a-job" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">-->
+<!--                                    Trainer registration-->
+<!--                                </a>-->
+<!--                            </li>-->
+<!--                            <li class="nav-item">-->
+<!--                                <a routerLink="/categories" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">-->
+<!--                                    Categories-->
+<!--                                </a>-->
+<!--                            </li>-->
+<!--                            <li class="nav-item">-->
+<!--                                <a routerLink="/pricing" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">-->
+<!--                                    Pricing for trainers-->
+<!--                                </a>-->
+<!--                            </li>-->
+<!--                            <li class="nav-item">-->
+<!--                                <a routerLink="/contact" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">-->
+<!--                                    Contact us-->
+<!--                                </a>-->
+<!--                            </li>-->
+<!--                            &lt;!&ndash;                            <li class="nav-item">&ndash;&gt;-->
+<!--                            &lt;!&ndash;                                <a routerLink="/faq" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">&ndash;&gt;-->
+<!--                            &lt;!&ndash;                                    FAQ&ndash;&gt;-->
+<!--                            &lt;!&ndash;                                </a>&ndash;&gt;-->
+<!--                            &lt;!&ndash;                            </li>&ndash;&gt;-->
+<!--                            <li class="nav-item">-->
+<!--                                <a routerLink="/profile-authentication" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">-->
+<!--                                    Login/Register-->
+<!--                                </a>-->
+<!--                            </li>-->
+<!--                            <li class="nav-item">-->
+<!--                                <a routerLink="/forgot-password" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">-->
+<!--                                    Forgot Password-->
+<!--                                </a>-->
+<!--                            </li>-->
+<!--                            &lt;!&ndash;                            <li class="nav-item">&ndash;&gt;-->
+<!--                            &lt;!&ndash;                                <a routerLink="/privacy-policy" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">&ndash;&gt;-->
+<!--                            &lt;!&ndash;                                    Privacy Policy&ndash;&gt;-->
+<!--                            &lt;!&ndash;                                </a>&ndash;&gt;-->
+<!--                            &lt;!&ndash;                            </li>&ndash;&gt;-->
+<!--                            &lt;!&ndash;                            <li class="nav-item">&ndash;&gt;-->
+<!--                            &lt;!&ndash;                                <a routerLink="/terms-conditions" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">&ndash;&gt;-->
+<!--                            &lt;!&ndash;                                    Terms & Conditions&ndash;&gt;-->
+<!--                            &lt;!&ndash;                                </a>&ndash;&gt;-->
+<!--                            &lt;!&ndash;                            </li>&ndash;&gt;-->
+<!--                            <li class="nav-item">-->
+<!--                                <a routerLink="/not-found" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">-->
+<!--                                    404 Error Page-->
+<!--                                </a>-->
+<!--                            </li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
+                    <!--                    <li class="nav-item">-->
+                    <!--                        <a href="javascript:void(0)" class="dropdown-toggle nav-link">-->
+                    <!--                            Blog-->
+                    <!--                        </a>-->
+                    <!--                        <ul class="dropdown-menu">-->
+                    <!--                            <li class="nav-item">-->
+                    <!--                                <a routerLink="/blog" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">-->
+                    <!--                                    Blog Grid-->
+                    <!--                                </a>-->
+                    <!--                            </li>-->
+                    <!--                            <li class="nav-item">-->
+                    <!--                                <a routerLink="/blog-details" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">-->
+                    <!--                                    Blog Details-->
+                    <!--                                </a>-->
+                    <!--                            </li>-->
+                    <!--                        </ul>-->
+                    <!--                    </li>-->
+                </ul>
+                <ul class="navbar-nav for-responsive">
+                    <li class="nav-item" *ngIf="isLoggedIn===false">
+                        <a routerLink="/" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="toggleClass()">
+                            Home
+                        </a>
+                    </li>
+                    <li class="nav-item" *ngIf="isLoggedIn===true">
+                        <a routerLink="/job-listings" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                           (click)="toggleClass()">
+                            Find Jobs
+                        </a>
+                    </li>
+                    <li class="nav-item" *ngIf="isLoggedIn===true">
+                        <a href="javascript:void(0)" class="dropdown-toggle nav-link">
+                            Companies
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="nav-item">
+                                <a routerLink="/companies" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                                   (click)="toggleClass()">
+                                    Companies List
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a routerLink="/company-details" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                                   (click)="toggleClass()">
+                                    Company Details
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="javascript:void(0)" class="dropdown-toggle nav-link">
+                            Candidates
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="nav-item">
+                                <a routerLink="/candidates" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                                   (click)="toggleClass()">
+                                    Candidates List
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a routerLink="/candidate-details" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                                   (click)="toggleClass()">
+                                    Candidate Details
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="javascript:void(0)" class="dropdown-toggle nav-link">
+                            Pages
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="nav-item">
+                                <a routerLink="/about" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                                   (click)="toggleClass()">
+                                    About Us
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a routerLink="/post-a-job" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                                   (click)="toggleClass()">
+                                    Post A Job
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a routerLink="/categories" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                                   (click)="toggleClass()">
+                                    Categories
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a routerLink="/pricing" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                                   (click)="toggleClass()">
+                                    Pricing
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a routerLink="/contact" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                                   (click)="toggleClass()">
+                                    Contact Us
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a routerLink="/faq" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                                   (click)="toggleClass()">
+                                    FAQ
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a routerLink="/profile-authentication" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                                   (click)="toggleClass()">
+                                    Login/Register
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a routerLink="/forgot-password" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                                   (click)="toggleClass()">
+                                    Forgot Password
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a routerLink="/privacy-policy" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                                   (click)="toggleClass()">
+                                    Privacy Policy
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a routerLink="/terms-conditions" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                                   (click)="toggleClass()">
+                                    Terms & Conditions
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a routerLink="/not-found" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                                   (click)="toggleClass()">
+                                    404 Error Page
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="javascript:void(0)" class="dropdown-toggle nav-link">
+                            Blog
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="nav-item">
+                                <a routerLink="/blog" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                                   (click)="toggleClass()">
+                                    Blog Grid
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a routerLink="/blog-details" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                                   (click)="toggleClass()">
+                                    Blog Details
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="others-option d-sm-flex align-items-center" *ngIf="isLoggedIn!==true">
+                    <div class="option-item">
+                        <a routerLink="/login" class="default-btn">
+                            Login <i class="ri-user-3-line"></i>
+                        </a>
+                    </div>
+                    <div class="option-item">
+                        <a routerLink="/register" class="default-btn">
+                            Register <i class="ri-user-3-line"></i>
+                        </a>
+                    </div>
+                </div>
+<!--                <div class="others-option d-sm-flex align-items-center" *ngIf="isLoggedIn===true">-->
+<!--                    <div class="option-item">-->
+<!--                        Hello, {{ currentUser.firstName }}-->
+<!--                    </div>-->
+<!--                    <div class="option-item">-->
+<!--                        <a (click)="logout()" class="default-btn">-->
+<!--                            Log out <i class="ri-user-3-line"></i>-->
+<!--                        </a>-->
+<!--                    </div>-->
+<!--                </div>-->
+                <div class="others-option d-sm-flex align-items-center" *ngIf="isLoggedIn===true" style="margin-right: 80px;">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a href="javascript:void(0)" class="dropdown-toggle nav-link">
+                                <img src="assets/images/users/user.png" style="width: 30px;" alt="user-image">
+                                Profile
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item">
+                                    <a *ngIf="currentUser.isTrainer==false" routerLink="/company-details" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                                        Profile information
+                                    </a>
+                                    <a *ngIf="currentUser.isTrainer==true" routerLink="/candidate-details" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                                        Profile information
+                                    </a>
+                                    <a *ngIf="!authService.isAdmin" routerLink="/reservations" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                                        My reservations
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="default-btn nav-link" routerLink="/login" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="toggleClass()">
+                                        Log out
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
