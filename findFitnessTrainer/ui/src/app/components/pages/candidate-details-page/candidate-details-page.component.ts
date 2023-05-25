@@ -21,6 +21,10 @@ export class CandidateDetailsPageComponent implements OnInit {
     minDate: any;
     selectedDate: any;
     selectedHour: any;
+
+    totalRating: any;
+
+    starsArray: number[] = Array(5).fill(0).map((_, index) => index + 1);
     hoursAll: string[] = [
         '7:00',
         '8:00',
@@ -58,9 +62,16 @@ export class CandidateDetailsPageComponent implements OnInit {
         } else {
             this.router.navigateByUrl("/job-listings")
         }
-
+        this.trainerService.getTotalRating(this.currentTrainer.id).subscribe(result => {
+            this.totalRating = result;
+        });
         this.minDate=new Date();
         this.hoursAvailable = this.hoursAll;
+    }
+
+
+    getStarsArray(): number[] {
+        return Array(this.totalRating).fill(0).map((_, index) => index);
     }
 
     setHoursData(e: any) {
@@ -79,9 +90,9 @@ export class CandidateDetailsPageComponent implements OnInit {
             this.hoursAvailable = this.hoursAll;
             this.selectedHour = null;
             this.selectedDate = null;
-            setTimeout(() => {
-                this.bookingStatus = false;
-            }, 5000);
+            // setTimeout(() => {
+            //     this.bookingStatus = false;
+            // }, 10000);
         }, error => {
             console.log(error);
             this.bookingStatus = false;

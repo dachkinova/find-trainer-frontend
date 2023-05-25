@@ -18,8 +18,6 @@ export class WriteAReviewComponent implements OnInit {
     rating: any;
     sent = false;
 
-
-
     constructor(private formBuilder: FormBuilder, private trainerService: TrainerService, private storageService: StorageService) {
     }
 
@@ -40,13 +38,14 @@ export class WriteAReviewComponent implements OnInit {
     }
 
     sendReview() {
-        this.sent = true;
+
         let userId = this.storageService.getUser().id;
         let trainerId = this.currentTrainer.id;
         console.log(this.formData);
         this.trainerService.sendReview(this.review, this.stars, trainerId, userId).subscribe({
                 next: data => {
                     console.log(data)
+                    this.sent = true;
                 },
                 error: err => {
                     return empty();

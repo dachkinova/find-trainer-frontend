@@ -1,10 +1,10 @@
 <div class="testimonials-area ptb-100">
     <div class="container">
         <div class="section-title">
-            <h2>Reviews From Clients</h2>
+            <h2>Отзиви от клиенти</h2>
             <div class="bar ms-auto me-auto"></div>
-            <p *ngIf="reviews!=''" class="ms-auto me-auto">Here are reviews from clients:</p>
-            <p *ngIf="reviews==''" class="ms-auto me-auto">There are still no reviews for this trainer. Be the first one!</p>
+            <p *ngIf="reviews!=''" class="ms-auto me-auto">Вижте мнението на клиенти, използвали услугите:</p>
+            <p *ngIf="reviews==''" class="ms-auto me-auto">Все още няма отзиви за този треньор. Можеш да бъдеш първи!</p>
         </div>
         <div class="testimonials-slides" *ngFor="let review of reviews">
 <!--            <owl-carousel-o [options]="testimonialsSlides">-->
@@ -16,8 +16,7 @@
                                 <div class="line1"></div>
                                 <div class="line2"></div>
                             </div>
-                            <h3>{{review.userId.firstName}} {{review.userId.lastName}}</h3>
-                            <span>IT Manager</span>
+                            <h3>{{review.user.firstName}} {{review.user.lastName}}</h3>
                         </div>
                         <p>{{review.review}}</p>
                         <div class="rating">

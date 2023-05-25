@@ -2,60 +2,51 @@
 <div class="banner-area">
     <div class="container">
         <div class="banner-content">
-            <h1>Searching For A Sports Trainer? <br>Find the Perfect One For You</h1>
+            <h1>Търсиш спортен треньор? <br>Намери перфектния за теб!</h1>
             <div class="banner-form">
                 <form>
                     <div class="row">
-                        <!--                        <div class="col-lg-4 col-md-4">-->
-                        <!--                            <div class="form-group">-->
-                        <!--                                <input class="form-control" type="text" placeholder="City">-->
-                        <!--                                <i class="ri-map-pin-line"></i>-->
-                        <!--                            </div>-->
-                        <!--                        </div>-->
                         <div class="col-lg-5 col-md-5">
                             <div class="form-group">
-                                <input id="name" class="form-control" type="text" placeholder="Trainer name or surname" (change)="setFilterData($event)">
+                                <input id="name" class="form-control" type="text" placeholder="Име или фамалия на треньор" (input)="setFilterData($event)">
                                 <i class="ri-search-line"></i>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6">
-                            <div class="form-group">
-                                <select id="location" class="form-select form-control" (change)="setFilterData($event)">
-                                    <option value="" disabled selected>City</option>
-                                    <option *ngFor="let city of cities" value="{{city.city}}">{{city.city}}</option>
-                                </select>
+                            <form class="example-form form-group">
                                 <i class="ri-map-pin-line"></i>
-                            </div>
+                                <mat-form-field class="example-full-width cities-dropdown">
+                                    <mat-label>Населено място</mat-label>
+                                    <input type="text"
+                                           placeholder="Start typing..."
+                                           aria-label="Number"
+                                           matInput
+                                           [formControl]="myControl"
+                                           [matAutocomplete]="auto">
+                                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="setFilterData($event)">
+                                        <mat-option  id="location" *ngFor="let city of filteredCities | async" [value]="city.city">
+                                            {{ city.city }}
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                </mat-form-field>
+                            </form>
                         </div>
+
                         <div class="col-lg-6 col-md-6">
                             <div class="form-group">
                                 <select id="category" class="form-select form-control" (change)="setFilterData($event)">
-                                    <option value="" disabled selected>Category</option>
+                                    <option value="" disabled selected>Категория</option>
                                     <option *ngFor="let sport of sports" value="{{sport}}">{{sport}}</option>
                                 </select>
                                 <i class="ri-list-check-2"></i>
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-3">
-                            <button type="submit" class="submit-btn" (click)="filter()">Find Trainer</button>
+                            <button type="submit" class="submit-btn" (click)="filter()">Намери треньор</button>
                         </div>
                     </div>
-                    <!--                    <div class="col-lg-3 col-md-3" *ngIf="currentUser.isLoggedIn==false">-->
-                    <!--                        <button routerLink="/register" class="submit-btn">Register now</button>-->
-                    <!--                    </div>-->
                 </form>
             </div>
-
-            <!--            <div class="popular-search">-->
-            <!--                <span class="title">Popular Search: </span>-->
-            <!--                <a routerLink="/job-listing">Fitness</a>-->
-            <!--                <a routerLink="/job-listing">Crossfit</a>-->
-            <!--                <a routerLink="/job-listing">Yoga</a>-->
-            <!--                <a routerLink="/job-listing">Basketball</a>-->
-            <!--                <a routerLink="/job-listing">Volleyball</a>-->
-            <!--                <a routerLink="/job-listing">Group training</a>-->
-            <!--                <a routerLink="/job-listing">Dancing</a>-->
-            <!--            </div>-->
         </div>
     </div>
     <div class="banner-shapes">
@@ -65,9 +56,6 @@
         <div class="shape2">
             <img src="assets/images/banner/fitball.png" style="width: 80px; opacity: 0.3;" alt="shape">
         </div>
-        <!--        <div class="shape3">-->
-        <!--            <img src="assets/images/banner/kayak.png" style="width: 80px;" alt="user">-->
-        <!--        </div>-->
         <div class="shape4">
             <img src="assets/images/banner/medal.png" style="width: 100px; opacity: 0.5;" alt="shape">
         </div>
@@ -83,92 +71,27 @@
         <div class="shape8">
             <img src="assets/images/banner/sport%20(1).png" style="width: 80px; opacity: 0.3;" alt="user">
         </div>
-        <!--        <div class="shape9">-->
-        <!--            <img src="assets/images/banner/trophy.png" alt="user">-->
-        <!--            <div class="other-into-content">-->
-        <!--                <img src="assets/images/banner/shape5.jpg" alt="shape">-->
-        <!--            </div>-->
-        <!--        </div>-->
         <div class="shape10">
             <img src="assets/images/banner/trophy.png" style="width: 120px; opacity: 0.5;" alt="shape">
         </div>
     </div>
 </div>
-<!--<div class="inner-banner">-->
-<!--    <div class="container">-->
-<!--        <div class="inner-title text-center">-->
-<!--            <h3>Need a trainer? Find the best for you!</h3>-->
-<!--            <div class="banner-form">-->
-<!--                <form>-->
-<!--                    <div class="row">-->
-<!--                        &lt;!&ndash;                        <div class="col-lg-4 col-md-4">&ndash;&gt;-->
-<!--                        &lt;!&ndash;                            <div class="form-group">&ndash;&gt;-->
-<!--                        &lt;!&ndash;                                <input class="form-control" type="text" placeholder="City">&ndash;&gt;-->
-<!--                        &lt;!&ndash;                                <i class="ri-map-pin-line"></i>&ndash;&gt;-->
-<!--                        &lt;!&ndash;                            </div>&ndash;&gt;-->
-<!--                        &lt;!&ndash;                        </div>&ndash;&gt;-->
-<!--                        <div class="col-lg-5 col-md-5">-->
-<!--                            <div class="form-group">-->
-<!--                                <input class="form-control" type="text" placeholder="Trainer name">-->
-<!--                                <i class="ri-search-line"></i>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col-lg-6 col-md-6">-->
-<!--                            <div class="form-group">-->
-<!--                                <select class="form-select form-control">-->
-<!--                                    <option value="" disabled selected>City</option>-->
-<!--                                    <option *ngFor="let city of cities" value="{{city.city}}">{{city.city}}</option>-->
-<!--                                </select>-->
-<!--                                <i class="ri-map-pin-line"></i>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col-lg-6 col-md-6">-->
-<!--                            <div class="form-group">-->
-<!--                                <select class="form-select form-control">-->
-<!--                                    <option value="" disabled selected>Category</option>-->
-<!--                                    <option *ngFor="let sport of sports" value="{{sport}}">{{sport}}</option>-->
-<!--                                </select>-->
-<!--                                <i class="ri-list-check-2"></i>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col-lg-3 col-md-3">-->
-<!--                            <button type="submit" class="submit-btn">Find Trainer</button>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </form>-->
-<!--            </div>-->
-<!--            <div class="popular-search">-->
-<!--                <span class="title">Popular Search: </span>-->
-<!--                <a routerLink="/job-listing">Fitness</a>-->
-<!--                <a routerLink="/job-listing">Crossfit</a>-->
-<!--                <a routerLink="/job-listing">Yoga</a>-->
-<!--                <a routerLink="/job-listing">Basketball</a>-->
-<!--                <a routerLink="/job-listing">Volleyball</a>-->
-<!--                <a routerLink="/job-listing">Group training</a>-->
-<!--                <a routerLink="/job-listing">Dancing</a>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
 
-<!-- Jobs -->
 <div class="jobs-area ptb-100">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-12">
                 <div class="jend-grid-sorting row align-items-center">
                     <div class="col-lg-6 col-md-6 col-sm-5 result-count">
-                        <p>Showing 1 – 6 of 145 results</p>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-7 ordering">
                         <div class="select-box">
-                            <label>Sort By:</label>
-                            <select>
-                                <option value="Fitnes">Default</option>
-                                <option>Popularity</option>
-                                <option>Latest</option>
-                                <option>Price: low to high</option>
-                                <option>Price: high to low</option>
+                            <label>Подреди по:</label>
+                            <select style="width: 250px;" (change)="handleSortChange($event)">
+                                <option value="Default">Подразбиране</option>
+                                <option value="Latest">Най-скорошни</option>
+                                <option value="Price: low to high">Цена: от ниска към висока</option>
+                                <option value="Price: high to low">Цена: от висока към ниска</option>
                             </select>
                         </div>
                     </div>
@@ -186,7 +109,7 @@
                                     <h3><a routerLink="/job-details"></a>{{trainer.userId.firstName}} {{trainer.userId.lastName}}</h3>
                                     <ul class="job-list1">
                                         <li><i class="ri-menu-unfold-fill"></i>{{trainer.category}}</li>
-                                        <li><i class="ri-time-line"></i> 2 Week Ago</li>
+                                        <li><i class="ri-time-line"></i>{{ trainer.timeSinceCreation }}</li>
                                     </ul>
                                     <span><i class="ri-map-pin-line"></i>{{trainer.town}}</span>
                                 </div>
@@ -194,175 +117,9 @@
                                     <ul class="job-list2">
                                         <li class="time">{{trainer.typeOfTraining}}</li>
                                     </ul>
-                                    <div *ngIf="trainer.price!==null" class="price">{{trainer.price}}<span> BGN /Per Hour</span></div>
+                                    <div *ngIf="trainer.price!==null" class="price">{{trainer.price}}<span> лв. /на час</span></div>
                                 </div>
                                 <button class="bookmark-btn"><i class="ri-bookmark-line"></i></button>
-                            </div>
-                        </div>
-
-
-                        <!--                    <div class="col-lg-12 col-sm-6 col-md-6">-->
-                        <!--                        <div class="job-card">-->
-                        <!--                            <div class="content">-->
-                        <!--                                <div class="job-image">-->
-                        <!--                                    <a routerLink="/job-details">-->
-                        <!--                                        <img src="assets/images/job/job2.jpg" alt="job-image">-->
-                        <!--                                    </a>-->
-                        <!--                                </div>-->
-                        <!--                                <h3><a routerLink="/job-details">Creative Director</a></h3>-->
-                        <!--                                <ul class="job-list1">-->
-                        <!--                                    <li><i class="ri-briefcase-line"></i> Automotive Jobs</li>-->
-                        <!--                                    <li><i class="ri-time-line"></i> 2 Hour Ago</li>-->
-                        <!--                                </ul>-->
-                        <!--                                <span><i class="ri-map-pin-line"></i> 105 San Antonio, TX</span>-->
-                        <!--                            </div>-->
-                        <!--                            <div class="job-sub-content">-->
-                        <!--                                <ul class="job-list2">-->
-                        <!--                                    <li class="time">Full Time</li>-->
-                        <!--                                    <li class="freelance">Freelance</li>-->
-                        <!--                                </ul>-->
-                        <!--                                <div class="price">$120 - $140 <span>/Per Week</span></div>-->
-                        <!--                            </div>-->
-                        <!--                            <button class="bookmark-btn"><i class="ri-bookmark-line"></i></button>-->
-                        <!--                        </div>-->
-                        <!--                    </div>-->
-                        <!--                    <div class="col-lg-12 col-sm-6 col-md-6">-->
-                        <!--                        <div class="job-card">-->
-                        <!--                            <div class="content">-->
-                        <!--                                <div class="job-image">-->
-                        <!--                                    <a routerLink="/job-details">-->
-                        <!--                                        <img src="assets/images/job/job3.jpg" alt="job-image">-->
-                        <!--                                    </a>-->
-                        <!--                                </div>-->
-                        <!--                                <h3><a routerLink="/job-details">General Ledger Accountant</a></h3>-->
-                        <!--                                <ul class="job-list1">-->
-                        <!--                                    <li><i class="ri-briefcase-line"></i> Accounting  & Finance</li>-->
-                        <!--                                    <li><i class="ri-time-line"></i> 1 Day Ago</li>-->
-                        <!--                                </ul>-->
-                        <!--                                <span><i class="ri-map-pin-line"></i> 320 Los Angeles, CA</span>-->
-                        <!--                            </div>-->
-                        <!--                            <div class="job-sub-content">-->
-                        <!--                                <ul class="job-list2">-->
-                        <!--                                    <li class="time">Full Time</li>-->
-                        <!--                                    <li class="freelance">Freelance</li>-->
-                        <!--                                    <li class="internship">Internship</li>-->
-                        <!--                                </ul>-->
-                        <!--                                <div class="price">$120 - $140 <span>/Per Week</span></div>-->
-                        <!--                            </div>-->
-                        <!--                            <button class="bookmark-btn"><i class="ri-bookmark-line"></i></button>-->
-                        <!--                        </div>-->
-                        <!--                    </div>-->
-                        <!--                    <div class="col-lg-12 col-sm-6 col-md-6">-->
-                        <!--                        <div class="job-card">-->
-                        <!--                            <div class="content">-->
-                        <!--                                <div class="job-image">-->
-                        <!--                                    <a routerLink="/job-details">-->
-                        <!--                                        <img src="assets/images/job/job4.jpg" alt="job-image">-->
-                        <!--                                    </a>-->
-                        <!--                                </div>-->
-                        <!--                                <h3><a routerLink="/job-details">Finance Manager & Health </a></h3>-->
-                        <!--                                <ul class="job-list1">-->
-                        <!--                                    <li><i class="ri-briefcase-line"></i> Medical & Health</li>-->
-                        <!--                                    <li><i class="ri-time-line"></i> 5 Days Ago</li>-->
-                        <!--                                </ul>-->
-                        <!--                                <span><i class="ri-map-pin-line"></i> 320 Atlanta, GA</span>-->
-                        <!--                            </div>-->
-                        <!--                            <div class="job-sub-content">-->
-                        <!--                                <ul class="job-list2">-->
-                        <!--                                    <li class="time">Full Time</li>-->
-                        <!--                                    <li class="freelance">Freelance</li>-->
-                        <!--                                    <li class="urgent">Urgent</li>-->
-                        <!--                                </ul>-->
-                        <!--                                <div class="price">$30 - $40 <span>/Per Hour</span></div>-->
-                        <!--                            </div>-->
-                        <!--                            <button class="bookmark-btn"><i class="ri-bookmark-line"></i></button>-->
-                        <!--                        </div>-->
-                        <!--                    </div>-->
-                        <!--                    <div class="col-lg-12 col-sm-6 col-md-6">-->
-                        <!--                        <div class="job-card">-->
-                        <!--                            <div class="content">-->
-                        <!--                                <div class="job-image">-->
-                        <!--                                    <a routerLink="/job-details">-->
-                        <!--                                        <img src="assets/images/job/job5.jpg" alt="job-image">-->
-                        <!--                                    </a>-->
-                        <!--                                </div>-->
-                        <!--                                <h3><a routerLink="/job-details">Group Marketing Manager</a></h3>-->
-                        <!--                                <ul class="job-list1">-->
-                        <!--                                    <li><i class="ri-briefcase-line"></i> Customer</li>-->
-                        <!--                                    <li><i class="ri-time-line"></i> 3 Days Ago</li>-->
-                        <!--                                </ul>-->
-                        <!--                                <span><i class="ri-map-pin-line"></i> 305 Hicks St Brooklyn, NY</span>-->
-                        <!--                            </div>-->
-                        <!--                            <div class="job-sub-content">-->
-                        <!--                                <ul class="job-list2">-->
-                        <!--                                    <li class="time">Full Time</li>-->
-                        <!--                                    <li class="freelance">Freelance</li>-->
-                        <!--                                    <li class="urgent">Urgent</li>-->
-                        <!--                                </ul>-->
-                        <!--                                <div class="price">$30 - $40 <span>/Per Hour</span></div>-->
-                        <!--                            </div>-->
-                        <!--                            <button class="bookmark-btn"><i class="ri-bookmark-line"></i></button>-->
-                        <!--                        </div>-->
-                        <!--                    </div>-->
-                        <!--                    <div class="col-lg-12 col-sm-6 col-md-6">-->
-                        <!--                        <div class="job-card">-->
-                        <!--                            <div class="content">-->
-                        <!--                                <div class="job-image">-->
-                        <!--                                    <a routerLink="/job-details">-->
-                        <!--                                        <img src="assets/images/job/job6.jpg" alt="job-image">-->
-                        <!--                                    </a>-->
-                        <!--                                </div>-->
-                        <!--                                <h3><a routerLink="/job-details">iOS Developer</a></h3>-->
-                        <!--                                <ul class="job-list1">-->
-                        <!--                                    <li><i class="ri-briefcase-line"></i> IT Agency</li>-->
-                        <!--                                    <li><i class="ri-time-line"></i> 1 Days Ago</li>-->
-                        <!--                                </ul>-->
-                        <!--                                <span><i class="ri-map-pin-line"></i> Los Angeles, CA</span>-->
-                        <!--                            </div>-->
-                        <!--                            <div class="job-sub-content">-->
-                        <!--                                <ul class="job-list2">-->
-                        <!--                                    <li class="time">Full Time</li>-->
-                        <!--                                    <li class="freelance">Freelance</li>-->
-                        <!--                                </ul>-->
-                        <!--                                <div class="price">$20 - $30 <span>/Per Hour</span></div>-->
-                        <!--                            </div>-->
-                        <!--                            <button class="bookmark-btn"><i class="ri-bookmark-line"></i></button>-->
-                        <!--                        </div>-->
-                        <!--                    </div>-->
-                        <!--                    <div class="col-lg-12 col-sm-6 col-md-6">-->
-                        <!--                        <div class="job-card">-->
-                        <!--                            <div class="content">-->
-                        <!--                                <div class="job-image">-->
-                        <!--                                    <a routerLink="/job-details">-->
-                        <!--                                        <img src="assets/images/job/job7.jpg" alt="job-image">-->
-                        <!--                                    </a>-->
-                        <!--                                </div>-->
-                        <!--                                <h3><a routerLink="/job-details">Flutter Developer</a></h3>-->
-                        <!--                                <ul class="job-list1">-->
-                        <!--                                    <li><i class="ri-briefcase-line"></i> HiboTheme</li>-->
-                        <!--                                    <li><i class="ri-time-line"></i> 2 Days Ago</li>-->
-                        <!--                                </ul>-->
-                        <!--                                <span><i class="ri-map-pin-line"></i> New York, USA</span>-->
-                        <!--                            </div>-->
-                        <!--                            <div class="job-sub-content">-->
-                        <!--                                <ul class="job-list2">-->
-                        <!--                                    <li class="time">Part Time</li>-->
-                        <!--                                    <li class="freelance">Freelance</li>-->
-                        <!--                                </ul>-->
-                        <!--                                <div class="price">$22 - $23 <span>/Per Hour</span></div>-->
-                        <!--                            </div>-->
-                        <!--                            <button class="bookmark-btn"><i class="ri-bookmark-line"></i></button>-->
-                        <!--                        </div>-->
-                    </div>
-                    <div class="col-lg-12 col-md-12 col-sm-12">
-                        <div class="pagination-area">
-                            <div class="nav-links">
-                                <a routerLink="/job-listings" class="prev page-numbers"><i class="ri-arrow-left-s-line"></i></a>
-                                <span class="page-numbers current">1</span>
-                                <a routerLink="/job-listings" class="page-numbers">2</a>
-                                <a routerLink="/job-listings" class="page-numbers">3</a>
-                                <a routerLink="/job-listings" class="page-numbers">4</a>
-                                <a routerLink="/job-listings" class="next page-numbers"><i class="ri-arrow-right-s-line"></i></a>
                             </div>
                         </div>
                     </div>
@@ -370,57 +127,32 @@
             </div>
             <div class="col-lg-4 col-md-12">
                 <div class="job-listings-sidebar">
-                    <!--                    <div class="widget-item">-->
-                    <!--                        <h3>Type of Category</h3>-->
-                    <!--                        <div class="widget-body">-->
-                    <!--                            <ul class="custom-checkbox">-->
-                    <!--                                <li *ngFor="let sport of sports">-->
-                    <!--                                    <div class="form-check">-->
-                    <!--                                        <input class="form-check-input" type="checkbox" id="all-levels" value= "{{sport}}" (click)="filterByCategory($event)">-->
-                    <!--                                        <label class="form-check-label" for="all-levels">-->
-                    <!--                                            {{sport}}-->
-                    <!--                                        </label>-->
-                    <!--                                    </div>-->
-                    <!--                                </li>-->
-                    <!--                            </ul>-->
-                    <!--                        </div>-->
-                    <!--                    </div>-->
-                    <h4>Additional filters</h4>
-<!--                    <div class="widget-item">-->
-<!--                        <div class="form-group">-->
-<!--                            <h3>Type of Category</h3>-->
-<!--                            <select id="category" class="form-select" (change)="setFilterData($event)">-->
-<!--                                <option value="" selected>None</option>-->
-<!--                                <option *ngFor="let sport of sports" value="{{sport}}">{{sport}}</option>-->
-<!--                            </select>-->
-<!--                        </div>-->
-<!--                    </div>-->
+                    <h4>Допълнителни критерии</h4>
                     <div class="widget-item">
                         <div class="form-group">
-                            <h3>Type of Training</h3>
+                            <h3>Тип на тренировка</h3>
                             <select id="typeOfTraining" class="form-select" (change)="setFilterData($event)">
-                                <option value="" selected>None</option>
-                                <option value="in person">In person</option>
-                                <option value="online">Online</option>
-                                <option value="in person and online">In person and online</option>
+                                <option value="" selected>Всички</option>
+                                <option value="лично">Обучение на живо</option>
+                                <option value="онлайн">Онлайн обучение</option>
                             </select>
                         </div>
                     </div>
                     <div class="widget-item">
                         <div class="form-group">
-                            <h3>Based on Gender</h3>
+                            <h3>Пол на треньора</h3>
                             <select id="gender" class="form-select" (change)="setFilterData($event)">
-                                <option value="" selected>None</option>
-                                <option value="female">Female</option>
-                                <option value="male">Male</option>
+                                <option value="" selected>Всички</option>
+                                <option value="жена">Жена</option>
+                                <option value="мъж">Мъж</option>
                             </select>
                         </div>
                     </div>
                     <div class="widget-item">
                         <div class="form-group">
-                            <h3>Based on Rating</h3>
+                            <h3>Рейтинг</h3>
                             <select id="rating" class="form-select" (change)="setFilterData($event)">
-                                <option value="" selected>None</option>
+                                <option value="" selected>Всички</option>
                                 <option value="1">*</option>
                                 <option value="2">**</option>
                                 <option value="3">***</option>
@@ -431,136 +163,21 @@
                     </div>
                     <div class="widget-item">
                         <div class="form-group">
-                            <h3>Price range per hour</h3>
+                            <h3>Заплащане (на час)</h3>
                             <div style="display: flex; justify-content: center;">
-                                <input id="minPrice" style="width: 150px; margin-right: 10px;" type="text" class="form-control" placeholder="Minimum price" (change)="setFilterData($event)">
-                                <input id="maxPrice" style="width: 150px;" type="text" class="form-control" placeholder="Maximum price" (change)="setFilterData($event)">
+                                <input id="minPrice" style="width: 150px; margin-right: 10px;" type="text" class="form-control" placeholder="Минимално" (change)="setFilterData($event)">
+                                <input id="maxPrice" style="width: 150px;" type="text" class="form-control" placeholder="Максимално" (change)="setFilterData($event)">
                             </div>
                         </div>
                     </div>
                     <div>
                         <div class="button-wrapper">
-                            <button type="submit" class="submit-btn" (click)="filter()">Filter</button>
+                            <button type="submit" class="submit-btn" (click)="filter()">Филтрирай</button>
                         </div>
                         <div class="button-wrapper">
-                            <button type="submit" class="submit-btn" style="background-color: #ce8483" (click)="clearFilters()">Clear filters</button>
+                            <button type="submit" class="submit-btn" style="background-color: #ce8483" (click)="clearFilters()">Изчисти филтрите</button>
                         </div>
                     </div>
-                    <!--                    <div class="widget-item">-->
-                    <!--                        <h3>Rating</h3>-->
-                    <!--                        <div class="widget-body">-->
-                    <!--                            <ul class="custom-checkbox">-->
-                    <!--                                <li>-->
-                    <!--                                    <div class="form-check">-->
-                    <!--                                        <input class="form-check-input" type="checkbox" id="paid">-->
-                    <!--                                        <label class="form-check-label" for="paid">-->
-                    <!--                                            Student Level-->
-                    <!--                                            <span>(750)</span>-->
-                    <!--                                        </label>-->
-                    <!--                                    </div>-->
-                    <!--                                </li>-->
-                    <!--                                <li>-->
-                    <!--                                    <div class="form-check">-->
-                    <!--                                        <input class="form-check-input" type="checkbox" id="free">-->
-                    <!--                                        <label class="form-check-label" for="free">-->
-                    <!--                                            Entry Level-->
-                    <!--                                            <span>(111)</span>-->
-                    <!--                                        </label>-->
-                    <!--                                    </div>-->
-                    <!--                                </li>-->
-                    <!--                                <li>-->
-                    <!--                                    <div class="form-check">-->
-                    <!--                                        <input class="form-check-input" type="checkbox" id="mid-level">-->
-                    <!--                                        <label class="form-check-label" for="mid-level">-->
-                    <!--                                            Mid Level-->
-                    <!--                                            <span>(65)</span>-->
-                    <!--                                        </label>-->
-                    <!--                                    </div>-->
-                    <!--                                </li>-->
-                    <!--                                <li>-->
-                    <!--                                    <div class="form-check">-->
-                    <!--                                        <input class="form-check-input" type="checkbox" id="senior-level">-->
-                    <!--                                        <label class="form-check-label" for="senior-level">-->
-                    <!--                                            Senior level-->
-                    <!--                                            <span>(43)</span>-->
-                    <!--                                        </label>-->
-                    <!--                                    </div>-->
-                    <!--                                </li>-->
-                    <!--                                <li>-->
-                    <!--                                    <div class="form-check">-->
-                    <!--                                        <input class="form-check-input" type="checkbox" id="director">-->
-                    <!--                                        <label class="form-check-label" for="director">-->
-                    <!--                                            Director-->
-                    <!--                                            <span>(99)</span>-->
-                    <!--                                        </label>-->
-                    <!--                                    </div>-->
-                    <!--                                </li>-->
-                    <!--                                <li>-->
-                    <!--                                    <div class="form-check">-->
-                    <!--                                        <input class="form-check-input" type="checkbox" id="vp">-->
-                    <!--                                        <label class="form-check-label" for="vp">-->
-                    <!--                                            VP-->
-                    <!--                                            <span>(132)</span>-->
-                    <!--                                        </label>-->
-                    <!--                                    </div>-->
-                    <!--                                </li>-->
-                    <!--                            </ul>-->
-                    <!--                        </div>-->
-                    <!--                    </div>-->
-                    <!--                    <div class="widget-item">-->
-                    <!--                        <h3>Price range per training</h3>-->
-                    <!--                        <div class="widget-body">-->
-                    <!--                            <ul class="custom-checkbox">-->
-                    <!--                                <li>-->
-                    <!--                                    <div class="form-check">-->
-                    <!--                                        <input class="form-check-input" type="checkbox" id="zero-to-one">-->
-                    <!--                                        <label class="form-check-label" for="zero-to-one">-->
-                    <!--                                            $1200 - $1400-->
-                    <!--                                            <span>(143)</span>-->
-                    <!--                                        </label>-->
-                    <!--                                    </div>-->
-                    <!--                                </li>-->
-                    <!--                                <li>-->
-                    <!--                                    <div class="form-check">-->
-                    <!--                                        <input class="form-check-input" type="checkbox" id="one-to-three">-->
-                    <!--                                        <label class="form-check-label" for="one-to-three">-->
-                    <!--                                            $400 - $600-->
-                    <!--                                            <span>(22)</span>-->
-                    <!--                                        </label>-->
-                    <!--                                    </div>-->
-                    <!--                                </li>-->
-                    <!--                                <li>-->
-                    <!--                                    <div class="form-check">-->
-                    <!--                                        <input class="form-check-input" type="checkbox" id="three-to-six">-->
-                    <!--                                        <label class="form-check-label" for="three-to-six">-->
-                    <!--                                            $1000 - $1200-->
-                    <!--                                            <span>(32)</span>-->
-                    <!--                                        </label>-->
-                    <!--                                    </div>-->
-                    <!--                                </li>-->
-                    <!--                                <li>-->
-                    <!--                                    <div class="form-check">-->
-                    <!--                                        <input class="form-check-input" type="checkbox" id="six-to-ten">-->
-                    <!--                                        <label class="form-check-label" for="six-to-ten">-->
-                    <!--                                            $800 - $1000-->
-                    <!--                                            <span>(102)</span>-->
-                    <!--                                        </label>-->
-                    <!--                                    </div>-->
-                    <!--                                </li>-->
-                    <!--                            </ul>-->
-                    <!--                        </div>-->
-                    <!--                    </div>-->
-                    <!--                    <div class="widget-item">-->
-                    <!--                        <h3>Based On Gender</h3>-->
-                    <!--                        <div class="widget-body">-->
-                    <!--                            <select class="form-select" (click)="toFilterData($event)">-->
-                    <!--                                <option selected>Select Gender</option>-->
-                    <!--                                <option value="1">Male</option>-->
-                    <!--                                <option value="2">Female</option>-->
-                    <!--                                <option value="3">Other</option>-->
-                    <!--                            </select>-->
-                    <!--                        </div>-->
-                    <!--                    </div>-->
                 </div>
             </div>
         </div>

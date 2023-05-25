@@ -16,7 +16,7 @@ export class ReservationsPageComponent implements OnInit {
 
     displayedColumns: string[] = ['index', 'name', 'date', 'hour', 'button2', 'button'];
     dataSource: Reservations[] = [];
-    currentTrainer: any;
+    isTrainer: any;
     reservationsData: any;
     trainer: any;
 
@@ -30,7 +30,8 @@ export class ReservationsPageComponent implements OnInit {
 
     ngOnInit(): void {
         var user = this.authService.getUser();
-        if (user.isTrainer) {
+        this.isTrainer = user.trainer;
+        if (user.trainer) {
             this.trainerService.getTrainerInfoById(user.id).subscribe((result) => {
                 this.trainer = result;
                 this.bookingService.getTrainerReservations(this.trainer.id).subscribe((result) => {
@@ -78,7 +79,7 @@ export class ReservationsPageComponent implements OnInit {
         const isNotReliable = row.isNotReliable;
         const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
             width: '350px',
-            data: {title: 'Confirmation', message: 'Are you sure you want to decline this reservation?'}
+            data: {title: 'Потвърждение', message: 'Сигурни ли сте, че искате да откажете тази резервация?'}
         });
 
         dialogRef.afterClosed().subscribe(result => {
@@ -102,7 +103,7 @@ export class ReservationsPageComponent implements OnInit {
     confirmAccept(row: any): void {
         const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
             width: '350px',
-            data: {title: 'Confirmation', message: 'Are you sure you want to accept this reservation?'}
+            data: {title: 'Потвърждение', message: 'Сигурни ли сте, че искате да приемете тази резервация?'}
         });
 
         dialogRef.afterClosed().subscribe(result => {

@@ -32,8 +32,5 @@ export class MainBannerComponent implements OnInit {
       this.trainersData = result;
       this.filterData = result;
     });
-
-
   }
-
 }

@@ -275,3 +275,52 @@
 
 /* Min width 1600px */
 @media only screen and (min-width: 1600px) {}
+
+.container {
+    //display: flex;
+}
+
+//.changePassForm {
+//    display: inline-block;
+//    margin-bottom: 20px;
+//    margin-top: 20px;
+//    font-size: larger;
+//    background-color: grey;
+//    padding: 10px;
+//    color: white;
+//    cursor: pointer;
+//}
+//
+//.passwordFormContainer {
+//    margin-top: 20px;
+//}
+//
+//.passwordForm {
+//    display: flex;
+//    flex-direction: column;
+//    align-items: center;
+//}
+//.fields {
+//    width: 280px;
+//}
+
+//.submit-btn {
+//    width: 100%;
+//    border: none;
+//    outline: none;
+//    display: block;
+//    border-radius: 5px;
+//    text-align: center;
+//    padding: 13px 20px;
+//    margin-top: 25px;
+//    color: var(--whiteColor);
+//    transition: var(--transition);
+//    background-color: var(--primaryColor);
+//    font: {
+//        size: var(--fontSize);
+//        weight: 500;
+//    };
+//    &:hover {
+//        background-color: var(--secondaryColor);
+//    }
+//}

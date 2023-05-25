@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl } from "@angular/forms";
+import { FormBuilder, FormControl, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import {empty, throwError} from 'rxjs';
 import { AuthService } from "../../../../service/auth.service";
+import {ConfirmationDialogComponent} from "../../common/confirmation-dialog/confirmation-dialog.component";
+import {SuccessfulDialogComponent} from "../../common/successful-dialog/successful-dialog.component";
+import { MatDialog } from '@angular/material/dialog';
+
 
 @Component({
     selector: 'register-page',
@@ -18,7 +22,7 @@ export class RegisterPageComponent implements OnInit {
     isSignUpFailed = false;
     typeOfProfile = false;
     loginError: any;
-    errorMessage: string = ''; // Added variable to store error message
+    errorMessage: string = '';
 
     get email() {
         return this.formData.get('email');
@@ -43,18 +47,18 @@ export class RegisterPageComponent implements OnInit {
     constructor(
         private router: Router,
         private formBuilder: FormBuilder,
-        public authService: AuthService
+        public authService: AuthService,
+        private dialog: MatDialog
     ) {}
 
     ngOnInit(): void {
         this.formData = this.formBuilder.group({
-            firstName: new FormControl(''),
-            username: new FormControl(''),
-            lastName: new FormControl(''),
-            email: new FormControl(''),
-            password: new FormControl('')
+            username: new FormControl('', Validators.required),
+            firstName: new FormControl('', Validators.required),
+            lastName: new FormControl('', Validators.required),
+            email: new FormControl('', [Validators.required, Validators.email]),
+            password: new FormControl('', [Validators.required, Validators.minLength(8)])
         });
-
         this.showError = false;
     }
 
@@ -77,10 +81,15 @@ export class RegisterPageComponent implements OnInit {
             )
             .subscribe(
                 data => {
-                    console.log(data);
-                    this.isSuccessful = true;
-                    this.isSignUpFailed = false;
-                    this.router.navigateByUrl('/login').then(r => this.reloadPage());
+                    const dialogRef = this.dialog.open(SuccessfulDialogComponent, {
+                        data: {
+                            message: 'Регистрацията е успешна!',
+                        },
+                    });
+
+                    dialogRef.componentInstance.okClick.subscribe(() => {
+                        this.router.navigateByUrl('/login');
+                    });
                 },
                 error => {
                     console.log('An error occurred:', error);

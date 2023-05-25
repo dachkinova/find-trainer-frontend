@@ -1,7 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {CityService} from "../../../../service/city.service";
 import {TrainerService} from "../../../../service/trainer.service";
 import {Router} from "@angular/router";
+import {Observable} from "rxjs";
+import {FormControl} from "@angular/forms";
+import { startWith, map } from 'rxjs/operators';
+import {MatAutocomplete, MatAutocompleteTrigger} from "@angular/material/autocomplete";
 
 @Component({
     selector: 'app-job-listings-page',
@@ -9,7 +13,7 @@ import {Router} from "@angular/router";
     styleUrls: ['./job-listings-page.component.scss']
 })
 export class JobListingsPageComponent implements OnInit {
-    cities: any;
+    // cities: any;
     sports: any;
     trainersData: any;
     filterData: any;
@@ -30,25 +34,25 @@ export class JobListingsPageComponent implements OnInit {
     alreadyFiltered: any;
     currentTrainerData: any;
 
+    myControl = new FormControl();
+    filteredCities: any;
+
+    cities: any[] = [];
+
+    @ViewChild(MatAutocompleteTrigger) autocomplete!: MatAutocompleteTrigger;
+
     constructor(public cityService: CityService, public trainerService: TrainerService, private router: Router) {
+
     }
-
-    // setFilter() {
-    //     return this.filterArray = {
-    //         category: this.filterCategory,
-    //         gender: this.filterGender,
-    //         typeOfTraining: this.filterType,
-    //         payment: this.filterPayment,
-    //         rating: this.filterRating
-    //     }
-    // }
-
-
     ngOnInit(): void {
         this.cityService.getCities().subscribe(result => {
             console.log(result);
             this.cities = result;
         });
+        this.filteredCities = this.myControl.valueChanges.pipe(
+            startWith(''),
+            map(value => this._filter(value))
+        );
         this.cityService.getSports().subscribe(result => {
             console.log(result);
             this.sports = result;
@@ -56,6 +60,16 @@ export class JobListingsPageComponent implements OnInit {
         this.trainerService.getAllTrainers().subscribe(result => {
             console.log(result);
             this.trainersData = result.filter((trainer: any) => trainer.confirmed === true);
+
+            // Calculate time difference for each trainer
+            this.trainersData.forEach((trainer: any) => {
+                const creationDate = new Date(trainer.userId.creationDate);
+                const currentDate = new Date();
+                const timeDifference = Math.floor((currentDate.getTime() - creationDate.getTime()) / (1000 * 60 * 60 * 24));
+
+                trainer.timeSinceCreation = timeDifference > 0 ? `${timeDifference} day(s) ago` : 'Today';
+            });
+
             this.filterData = this.trainersData;
         });
         // this.filterArray = [];
@@ -64,39 +78,53 @@ export class JobListingsPageComponent implements OnInit {
         // this.filterTypeOfTraining = "";
     }
 
-    toFilterData(e: any) {
-        this.filterData = this.trainersData.filter((t: any) => t.gender === e.target.value);
-        this.filterGender = e.target.value;
-        this.filterArray.push(this.filterGender)
-        console.log(this.filterData)
+    private _filter(value: string): string[] {
+        const filterValue = value.toLowerCase();
+        return this.cities.filter(city => city.city.toLowerCase().includes(filterValue));
     }
 
+    // setFilterDataDropdown(event: any) {
+    //     const selectedCity = event.option.value;
+    //     console.log(selectedCity); // Do something with the selected city value
+    //     // ...
+    // }
+    //
+    // toFilterData(e: any) {
+    //     this.filterData = this.trainersData.filter((t: any) => t.gender === e.target.value);
+    //     this.filterGender = e.target.value;
+    //     this.filterArray.push(this.filterGender)
+    //     console.log(this.filterData)
+    // }
+
     setFilterData(e: any) {
-        let type = e.target.id;
-        let value = e.target.value;
-        if(type === 'name') {
-            this.filterName = value;
-        }
-        if(type === 'location') {
-            this.filterLocation = value;
-        }
-        if (type === 'category') {
-            this.filterCategory = value;
-        }
-        if (type === 'typeOfTraining') {
-            this.filterTypeOfTraining = value;
-        }
-        if (type === 'gender') {
-            this.filterGender = value;
-        }
-        if (type === 'rating') {
-            this.filterRating = value;
-        }
-        if(type === 'minPrice') {
-            this.filterPriceMinValue = value;
-        }
-        if(type === 'maxPrice') {
-            this.filterPriceMaxValue = value;
+        if(e.target!=undefined) {
+            let type = e.target.id;
+            let value = e.target.value;
+            if (type === 'name') {
+                this.filterName = value;
+            }
+            if (type === 'category') {
+                this.filterCategory = value;
+            }
+            if (type === 'typeOfTraining') {
+                this.filterTypeOfTraining = value;
+            }
+            if (type === 'gender') {
+                this.filterGender = value;
+            }
+            if (type === 'rating') {
+                this.filterRating = value;
+            }
+            if (type === 'minPrice') {
+                this.filterPriceMinValue = value;
+            }
+            if (type === 'maxPrice') {
+                this.filterPriceMaxValue = value;
+            }
+        } else {
+            if (e.option.id === 'location') {
+                this.filterLocation = e.option.value;
+            }
         }
     }
 
@@ -140,9 +168,58 @@ export class JobListingsPageComponent implements OnInit {
     filter() {
         this.filterData = this.trainerService.filterTrainersByCriteria(this.filterName, this.filterLocation,
                 this.filterCategory, this.filterTypeOfTraining, this.filterGender,
-                this.filterRating, this.filterPriceMinValue, this.filterPriceMaxValue).subscribe(result => {
-            console.log(result);
-            this.filterData = result;
+            this.filterRating, this.filterPriceMinValue, this.filterPriceMaxValue).subscribe(result => {
+            let finalFilter = result.filter((trainer: any) => trainer.confirmed === true)
+            console.log(finalFilter);
+            this.filterData = finalFilter;
         });
+    }
+
+    handleSortChange(e: any) {
+        let sortOption = e.target.value;
+
+        // Sort the trainers based on the selected option
+        if (sortOption === 'Default') {
+            this.filterData = this.trainersData;
+        } else if (sortOption === 'Latest') {
+            this.sortDataByCreationDateNewerFirst();
+        } else if (sortOption === 'Price: low to high') {
+            this.sortDataByPriceLowToHigh();
+        } else if (sortOption === 'Price: high to low') {
+            this.sortDataByPriceHighToLow();
+        }
+    }
+
+    sortDataByPriceLowToHigh(): void {
+        if (this.filterData) {
+            this.filterData.sort((a: any, b: any) => {
+                if (a.price && b.price) {
+                    return a.price - b.price;
+                }
+                return 0;
+            });
+        }
+    }
+
+    sortDataByPriceHighToLow(): void {
+        if (this.filterData) {
+            this.filterData.sort((a: any, b: any) => {
+                if (a.price && b.price) {
+                    return b.price - a.price;
+                }
+                return 0;
+            });
+        }
+    }
+
+    sortDataByCreationDateNewerFirst(): void {
+        if (this.filterData) {
+            this.filterData.sort((a: any, b: any) => {
+                if (a.creationDate && b.creationDate) {
+                    return new Date(b.creationDate).getTime() - new Date(a.creationDate).getTime();
+                }
+                return 0;
+            });
+        }
     }
 }

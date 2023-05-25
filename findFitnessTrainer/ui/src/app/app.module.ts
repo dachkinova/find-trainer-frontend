@@ -60,7 +60,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { ConfirmationDialogComponent } from './components/common/confirmation-dialog/confirmation-dialog.component';
 import {ConfirmationDialogTrainerComponent} from "./components/common/confirmation-dialog-trainer/confirmation-dialog-trainer.component";
 import {AdminPageComponent} from "./components/pages/admin-page/admin-page.component";
-
+import {ChangePasswordPageComponent} from "./components/pages/change-password-page/change-password-page.component";
+import {SuccessfulDialogComponent} from "./components/common/successful-dialog/successful-dialog.component";
 
 @NgModule({
     declarations: [
@@ -107,7 +108,9 @@ import {AdminPageComponent} from "./components/pages/admin-page/admin-page.compo
         WriteAReviewComponent,
         ReservationsPageComponent,
         ConfirmationDialogComponent,
-        ConfirmationDialogTrainerComponent
+        SuccessfulDialogComponent,
+        ConfirmationDialogTrainerComponent,
+        ChangePasswordPageComponent
     ],
     imports: [
         BrowserModule,

@@ -22,11 +22,13 @@ export class TrainerService {
     }
 
     createTrainerInfo(gender: string, telephone: string, town: string, about: string, experience: string, certifications: string, category: string, typeOfTraining: string, price: any) {
-        let sessionToken = this.storageService.getUser().id;
-        console.log(sessionToken);
+        let id = this.storageService.getUser().id;
+        console.log(id);
+        let creationDate = '';
+        let isConfirmed = ''
         return this.http
-            .post<any>(`http://localhost:8099/v1/createTrainerInfo/${sessionToken}`,
-                { gender, telephone, town, about, experience, certifications, category, typeOfTraining, price });
+            .post<any>(`http://localhost:8099/v1/createTrainerInfo/${id}`,
+                { gender, telephone, town, about, experience, certifications, category, typeOfTraining, price, creationDate, isConfirmed});
     }
     getTrainerInfoById(userId: number) {
         return this.http
@@ -82,10 +84,12 @@ export class TrainerService {
             }
         }
         if (ratingStars != null) {
-            const params = new HttpParams().set('ratingStars', ratingStars);
+            let number = parseInt(ratingStars);
+
+            const params = new HttpParams().set('ratingStars', number);
             if (httpOptions.hasOwnProperty('params')) {
                 const existingParams = httpOptions['params'] as HttpParams;
-                httpOptions['params'] = existingParams.append('ratingStars', ratingStars);
+                httpOptions['params'] = existingParams.append('ratingStars', number);
             } else {
                 httpOptions = { params: params };
             }
@@ -113,12 +117,7 @@ export class TrainerService {
     }
 
     sendReview(review: any, rating: any, trainerId: number, userId: number) {
-        return this.http.post(`http://localhost:8099/v1/createRating`, {
-                review,
-                rating,
-                userId,
-                trainerId
-            },
+        return this.http.post(`http://localhost:8099/v1/createRating?review=${review}&rating=${rating}&userId=${userId}&trainerId=${trainerId}`,
             httpOptions);
     }
 
@@ -131,5 +130,10 @@ export class TrainerService {
         return this.http
             .post<any>(`http://localhost:8099/v1/updateProfileStatus?id=${id}&isConfirmed=${isConfirmed}`,
                 httpOptions);
+    }
+
+    getTotalRating(trainerId: number) {
+        return this.http
+            .get<any>(`http://localhost:8099/v1/getTotalRating/${trainerId}`);
     }
 }

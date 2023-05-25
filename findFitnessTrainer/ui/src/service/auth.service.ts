@@ -61,29 +61,18 @@ export class AuthService {
         );
     }
 
-    // logout() {
-    //   localStorage.removeItem('session-token');
-    //   // this.userSubject.next(new User());
-    // }
-
-    logout(): Observable<any> {
-        return this.http.post('http://localhost:8099/v1/logOutUser', {}, httpOptions);
+    changePassword(userId: number, oldPassword: string, newPassword: string): Observable<any> {
+        return this.http.post(
+            `http://localhost:8099/v1/auth/changePassword`,
+            {
+                userId,
+                oldPassword,
+                newPassword
+            },
+            httpOptions
+        );
     }
 
-    signOut(): void {
-        window.sessionStorage.clear();
-        window.alert("You signed out of your account")
-    }
-
-    public saveToken(token: string): void {
-        window.sessionStorage.removeItem('session-token');
-        window.sessionStorage.setItem('session-token', token);
-    }
-
-    public getToken(): string | null {
-        return window.sessionStorage.getItem('session-token');
-        //return localStorage.getItem('session-token');
-    }
 
     public saveUser(user: any): void {
         window.sessionStorage.removeItem('session-token');
@@ -97,6 +86,15 @@ export class AuthService {
             return JSON.parse(user);
         } else {
             return {};
+        }
+    }
+
+    getIsAdmin() {
+        const role = this.getUser().roles[0];
+        if (role == "ROLE_ADMIN") {
+            return true;
+        } else {
+            return false;
         }
     }
 }

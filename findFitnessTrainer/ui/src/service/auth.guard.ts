@@ -10,28 +10,32 @@ interface RouteData {
     providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-
     constructor(private router: Router, private authService: AuthService) { }
-
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-        const user = this.authService.getUser(); // Get the user object from session storage
-        const userRoles = user.roles; // Get the roles array from the user object
+        const user = this.authService.getUser(); //Вземане на потребителската информация от session storage
+        const userRoles = user.roles; //Вземане на ролите от обекта потребител
 
-        const routeData = route.data as RouteData; // Cast route.data to RouteData interface
+        const routeData = route.data as RouteData; // Кастваме route.data до RouteData интерфейса
 
-        // Check if the user has the required role to access the route
+        if (!user || Object.keys(user).length === 0) {
+            // Потребителя не е логнат, пренасочваме към страницата за вход в системата
+            this.router.navigate(['/login']);
+            return false;
+        }
+
+        // Проверяваме дали потребителя има нежния достъп за пътя
         if (routeData.roles && !this.hasAnyRole(userRoles, routeData.roles)) {
-            // User does not have the required role, redirect to unauthorized page or any other desired behavior
+            // Потребителя няма нужната роля, пренасочваме към страница за грешка
             this.router.navigate(['/unauthorized']);
             return false;
         }
 
-        // User has the required role, allow access to the route
+        // Потребителя има нужната роля, пренасочваме към поискания път
         return true;
     }
 
     private hasAnyRole(userRoles: string[], requiredRoles: string[]): boolean {
-        // Check if the user has any of the required roles
+        // Проверява дали потребителя има някоя от ролите
         return userRoles.some(role => requiredRoles.includes(role));
     }
 }

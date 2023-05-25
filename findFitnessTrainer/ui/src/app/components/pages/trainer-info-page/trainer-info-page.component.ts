@@ -7,6 +7,8 @@ import {FormBuilder, FormControl} from "@angular/forms";
 import {TrainerService} from "../../../../service/trainer.service";
 import {StorageService} from "../../../../service/storage.service";
 import {FileUploadService} from "../../../../service/file-upload.service";
+import {MatDialog} from "@angular/material/dialog";
+import {SuccessfulDialogComponent} from "../../common/successful-dialog/successful-dialog.component";
 
 @Component({
     selector: 'app-post-a-job-page',
@@ -52,7 +54,8 @@ export class TrainerInfoPageComponent implements OnInit, OnDestroy {
                 private router: Router,
                 private formBuilder: FormBuilder,
                 public trainerService: TrainerService,
-                public storageService: StorageService, public uploadService: FileUploadService) {
+                public storageService: StorageService, public uploadService: FileUploadService,
+                private dialog: MatDialog) {
     }
     changeCategory(e: any) {
         this.category = e.target.value;
@@ -129,8 +132,17 @@ export class TrainerInfoPageComponent implements OnInit, OnDestroy {
                     return empty();
                 })
             )
-            .subscribe(res => this.router.navigateByUrl('/candidate-details')
-            );
+            .subscribe(res => {
+                this.router.navigateByUrl('/candidate-details');
+                const dialogRef = this.dialog.open(SuccessfulDialogComponent, {
+                    data: {
+                        message: 'Вашата информация е добавена успешно!',
+                    }
+                });
+                dialogRef.afterClosed().subscribe(result => {
+                });
+            });
+
         console.log(this.formData.controls.telephone.value);
     };
 

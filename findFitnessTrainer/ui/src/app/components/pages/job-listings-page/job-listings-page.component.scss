@@ -60,7 +60,6 @@
         text-align: center;
         padding: 13px 20px;
         margin-top: 25px;
-        margin-left: 150px;
         color: var(--whiteColor);
         transition: var(--transition);
         background-color: var(--primaryColor);
@@ -1658,6 +1657,11 @@ p {
     &:hover {
         background-color: var(--secondaryColor);
     }
+}
+
+.cities-dropdown {
+    width: 250px !important;
+    margin-top: 20px;
 }
 
 

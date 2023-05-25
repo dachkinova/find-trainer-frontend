@@ -2,14 +2,14 @@
 <div class="inner-banner">
     <div class="container">
         <div class="inner-title text-center">
-            <h3>My Account</h3>
+            <h3>Регистрация</h3>
             <ul>
                 <li>
                     <a routerLink="/">
-                        Home
+                        Начало
                     </a>
                 </li>
-                <li>Login/Register</li>
+                <li>Регистрация</li>
             </ul>
         </div>
     </div>
@@ -21,42 +21,72 @@
         <div class="row">
             <div class="col-lg-6 col-md-12">
                 <div class="register-form">
-                    <h2>Register</h2>
+                    <h2>Регистрация</h2>
                     <form [formGroup]="formData">
                         <div class="form-group">
-                            <label>Username</label>
-                            <input type="text" class="form-control" placeholder="Username" formControlName="username" id="username">
+                            <label>Потребителско име<span style="color:red;"> *</span></label>
+                            <input type="text" class="form-control" placeholder="Потребителско име" formControlName="username" id="username">
+                            <div *ngIf="formData.controls['username']?.touched">
+                                <div *ngIf="formData.controls['username']?.errors" style="color: red">
+                                    Моля, въведете потребителско име.
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label>First name</label>
-                            <input type="text" class="form-control" placeholder="First name" formControlName="firstName" id="firstName">
+                            <label>Име<span style="color:red;"> *</span></label>
+                            <input type="text" class="form-control" placeholder="Име" formControlName="firstName" id="firstName">
+                            <div *ngIf="formData.controls['firstName']?.touched">
+                                <div *ngIf="formData.controls['firstName']?.errors" style="color: red">
+                                    Моля, попълнете своето име.
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label>Last name</label>
-                            <input type="text" class="form-control" placeholder="Last name" formControlName="lastName" id="lastName">
+                            <label>Фамилия<span style="color:red;"> *</span></label>
+                            <input type="text" class="form-control" placeholder="Фамилия" formControlName="lastName" id="lastName">
+                            <div *ngIf="formData.controls['lastName']?.touched">
+                                <div *ngIf="formData.controls['lastName']?.errors" style="color: red">
+                                    Моля, въведете своята фамилия.
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label>Email</label>
-                            <input type="email" class="form-control" placeholder="Email" formControlName="email" id="email">
+                            <label>Имейл<span style="color:red;"> *</span></label>
+                            <input type="email" class="form-control" placeholder="Имейл" formControlName="email" id="email">
+                            <div *ngIf="email.invalid && (email.dirty || email.touched)">
+                                <div *ngIf="email.errors.required" style="color: red">
+                                    Моля, въведете своя имейл.
+                                </div>
+                                <div *ngIf="email.errors.email" style="color: red">
+                                    Въведения имейл не е валиден.
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label>Password</label>
+                            <label>Парола<span style="color:red;"> *</span></label>
                             <input type="password" class="form-control" placeholder="Password" formControlName="password" id="password">
+                            <div *ngIf="password.invalid && (password.dirty || password.touched)">
+                                <div *ngIf="password.errors?.required" style="color: red">
+                                    Моля, въведете парола.
+                                </div>
+                                <div *ngIf="password.errors?.minlength && !password.errors?.required" style="color: red">
+                                    Моля, въведете парола с поне 8 символа.
+                                </div>
+                            </div>
                         </div>
-                        <p class="description">The password should be at least eight characters long. To make it stronger, use upper and lower case letters, numbers, and symbols like ! " ? $ % ^ & )</p>
                         <hr>
                         <div class="col-lg-6 col-md-6">
                             <div class="form-group">
-                                <label>Type of profile</label>
+                                <label>Аз съм:<span style="color:red;"> *</span></label>
                                 <select class="form-select" (change)="changeTypeOfProfile($event)">
-                                    <option value="select" disabled selected>Select type of profile</option>
-                                    <option value="client">Client profile</option>
-                                    <option value="trainer">Trainer profile</option>
+                                    <option value="select" disabled selected>Тип на профил</option>
+                                    <option value="client">Клиент</option>
+                                    <option value="trainer">Треньор</option>
                                 </select>
                             </div>
                         </div>
                         <h3 style="color: red; margin-top: 20px; font-style: italic">{{this.errorMessage}}</h3>
-                        <button type="submit" (click)="toProfile()">Register</button>
+                        <button type="submit" (click)="toProfile()">Регистрирай се</button>
                     </form>
                 </div>
             </div>

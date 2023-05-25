@@ -37,8 +37,8 @@ export class BookingService {
             httpOptions);
     }
 
-    getTrainerReservations(trainerId: number) {
-        return this.http.get<any>(`http://localhost:8099/v1/getTrainerReservations/${trainerId}`,
+    getTrainerReservations(userId: number) {
+        return this.http.get<any>(`http://localhost:8099/v1/getTrainerReservations/${userId}`,
             httpOptions);
     }
     getClientReservations(clientId: number) {

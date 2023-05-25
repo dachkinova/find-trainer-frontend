@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl} from "@angular/forms";
+import {FormBuilder, FormControl, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {catchError, empty, of} from 'rxjs';
 import {AuthService} from "../../../../service/auth.service";
@@ -20,8 +20,8 @@ export class LoginPageComponent implements OnInit {
     errorMessage = '';
     roles: string[] = [];
 
-    get email() {
-        return this.formData.get('email');
+    get username() {
+        return this.formData.get('username');
     }
 
     get password() {
@@ -29,7 +29,7 @@ export class LoginPageComponent implements OnInit {
     }
 
     form: any = {
-        email: null,
+        username: null,
         password: null
     };
 
@@ -43,16 +43,16 @@ export class LoginPageComponent implements OnInit {
 
     ngOnInit(): void {
         this.formData = this.formBuilder.group({
-            email: new FormControl(''),
-            password: new FormControl(''),
+            username: new FormControl('', Validators.required),
+            password: new FormControl('', Validators.required),
         });
 
         this.showError = false;
     }
 
     toProfile() {
-        if (this.formData.controls.email.value == "admin" && this.formData.controls.password.value == "admin") {
-            this.authService.login(this.formData.controls.email.value, this.formData.controls.password.value).subscribe({
+        if (this.formData.controls.username.value == "admin") {
+            this.authService.login(this.formData.controls.username.value, this.formData.controls.password.value).subscribe({
                     next: data => {
                         this.storageService.saveUser(data);
                         this.isLoginFailed = false;
@@ -63,14 +63,14 @@ export class LoginPageComponent implements OnInit {
                         this.reloadPage();
                     },
                     error: err => {
-                        this.errorMessage = "Invalid email or password. Please check your credentials.";
+                        this.errorMessage = "Invalid username or password. Please check your credentials.";
                         this.isLoginFailed = true;
                         this.showError = true;
                     }
                 }
             );
         } else {
-            this.authService.login(this.formData.controls.email.value, this.formData.controls.password.value).subscribe({
+            this.authService.login(this.formData.controls.username.value, this.formData.controls.password.value).subscribe({
                     next: data => {
                         this.storageService.saveUser(data);
                         this.isLoginFailed = false;
@@ -81,7 +81,7 @@ export class LoginPageComponent implements OnInit {
                         this.reloadPage();
                     },
                 error: err => {
-                    this.errorMessage = "Invalid email or password. Please check your credentials.";
+                    this.errorMessage = "Invalid username or password. Please check your credentials.";
                     this.isLoginFailed = true;
                     this.showError = true;
                 }

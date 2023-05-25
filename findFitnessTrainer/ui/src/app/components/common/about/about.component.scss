@@ -65,3 +65,86 @@
 
 /* Min width 1600px */
 @media only screen and (min-width: 1600px) {}
+
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Welcome Section */
+.welcome-section {
+    text-align: center;
+    padding: 40px 0;
+}
+
+.welcome-section h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.welcome-section p {
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+/* Features Section */
+.features-section {
+    padding: 40px 0;
+}
+
+.features-section h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.features-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.features-section li {
+    font-size: 18px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+/* Join Section */
+.join-section {
+    text-align: center;
+    padding: 40px 0;
+}
+
+.join-section h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.join-section p {
+    font-size: 18px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.join-section .btn {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 18px;
+    text-decoration: none;
+    background-color: #00ca99;
+    color: #fff;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.join-section .btn:hover {
+    background-color: #0056b3;
+}

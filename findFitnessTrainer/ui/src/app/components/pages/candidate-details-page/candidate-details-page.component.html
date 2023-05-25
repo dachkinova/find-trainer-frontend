@@ -2,14 +2,14 @@
 <div class="inner-banner">
     <div class="container">
         <div class="inner-title text-center">
-            <h3>Trainer Details</h3>
+            <h3>Информация за треньор</h3>
             <ul>
                 <li>
                     <a routerLink="/">
-                        Home
+                        Начало
                     </a>
                 </li>
-                <li>Trainer Details</li>
+                <li>Информация за треньор</li>
             </ul>
         </div>
     </div>
@@ -26,13 +26,9 @@
                         <div class="title">
                             <h3>{{this.currentTrainer.userId.firstName}} {{this.currentTrainer.userId.lastName}}</h3>
                         </div>
-                        <p>Sport trainer</p>
+                        <p>Спортен треньор</p>
                         <div class="rating">
-                            <i class="ri-star-fill"></i>
-                            <i class="ri-star-fill"></i>
-                            <i class="ri-star-fill"></i>
-                            <i class="ri-star-fill"></i>
-                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill" *ngFor="let star of getStarsArray()"></i>
                         </div>
                         <ul class="social-icon">
                             <li>
@@ -58,23 +54,23 @@
                         </ul>
                     </div>
                     <div class="info">
-                        <h3>Contact Info</h3>
+                        <h3>Контакти</h3>
                         <ul>
                             <li>
-                                <span>Gender</span>
+                                <span>Пол</span>
                                 {{this.currentTrainer.gender}}
                             </li>
                             <li>
-                                <span>Location</span>
+                                <span>Локация</span>
                                 <a href="https://www.google.bg/maps/place/Sofia/@42.6953468,23.1838624,11z/data=!3m1!4b1!4m6!3m5!1s0x40aa8682cb317bf5:0x400a01269bf5e60!8m2!3d42.6977082!4d23.3218675!16zL20vMGZ0ang?hl=en&authuser=0"
-                                   target="_blank">{{currentTrainer.city}}</a>
+                                   target="_blank">{{currentTrainer.town}}</a>
                             </li>
                             <li>
-                                <span>Email</span>
+                                <span>Имейл</span>
                                 <a href="mailto:hello@henry.com">{{this.currentTrainer.userId.email}}</a>
                             </li>
                             <li>
-                                <span>Phone</span>
+                                <span>Телефон</span>
                                 <a href="">{{this.currentTrainer.telephone}}</a>
                             </li>
                         </ul>
@@ -83,10 +79,10 @@
             </div>
             <div class="col-lg-6 col-md-12">
                 <div class="candidate-details-desc">
-                    <h4>About</h4>
+                    <h4>Описание</h4>
                     <div [innerHTML]="this.currentTrainer.about | htmldecoder"></div>
                     <hr>
-                    <h4>Photos</h4>
+                    <h4>Снимки</h4>
                     <div class="row" style="justify-content: center">
                         <div class="col-lg-4 col-sm-4 col-md-4">
                             <div class="image">
@@ -105,33 +101,33 @@
                         </div>
                     </div>
                     <hr>
-                    <h3>Experience:</h3>
-                    <p>{{this.currentTrainer.experience}}</p>
+                    <h3>Години опит</h3>
+                    <p>{{this.currentTrainer.experience}} years</p>
                     <hr>
-                    <h3>Category</h3>
+                    <h3>Категория</h3>
                     <ul class="candidate-skills">
                         <li>{{this.currentTrainer.category}}</li>
                     </ul>
                     <hr>
-                    <h3>Type of training</h3>
+                    <h3>Тип на тренировка</h3>
                     <ul class="candidate-skills">
                         <li>{{this.currentTrainer.typeOfTraining}}</li>
                     </ul>
                     <hr>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-12">
+            <div class="col-lg-3 col-md-12" *ngIf="!currentUser.trainer">
                 <div class="other-candidates-list" [class.disabled]="!reliable">
-                    <h3>Make a reservation</h3>
+                    <h3>Направи резервация</h3>
                     <mat-form-field appearance="fill" class="form-field" [class.disabled]="!reliable">
-                        <mat-label>Choose a date</mat-label>
+                        <mat-label>Избери дата</mat-label>
                         <input matInput [matDatepicker]="picker" [min]="minDate" [value]="selectedDate" (dateChange)="chosenDate($event)" [disabled]="!reliable">
                         <mat-hint>MM/DD/YYYY</mat-hint>
                         <mat-datepicker-toggle matIconSuffix [for]="picker" [disabled]="!reliable"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
                     </mat-form-field>
                     <mat-form-field appearance="fill" class="form-field" [class.disabled]="!reliable">
-                        <mat-label>Pick hour:</mat-label>
+                        <mat-label>Избери час</mat-label>
                         <mat-select [(ngModel)]="selectedHour" (ngModelChange)="setHoursData($event)" [disabled]="!reliable">
                             <mat-option *ngFor="let hour of hoursAvailable" [value]="hour">
                                 {{hour}}
@@ -140,12 +136,16 @@
                     </mat-form-field>
                     <div>
                         <button type="submit" class="submit-btn" (click)="createReservation()" [disabled]="!reliable || bookingStatus">
-                            Make a reservation
+                            Направи резервация
                         </button>
                     </div>
                     <div class="disabled-overlay" *ngIf="!reliable"></div>
                     <h4 class="disabled-message" *ngIf="!reliable" style="color: red">
-                        You cannot make reservations because you are marked as not reliable.
+                        Не можете да правите резервации, защото сте отбелязани като ненадеждни.
+                    </h4>
+                    <h4 *ngIf="bookingStatus" style="color: green; font-style: italic; margin-top: 20px;">
+                        Вашата резервация е направена успешно. Можете да намерите подробности на страницата "Моите резервации".
+                        Не пропускайте да присъствате на резервацията на планираната дата и час, за да поддържате статуса си за надежност.
                     </h4>
                 </div>
             </div>

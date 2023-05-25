@@ -3,8 +3,8 @@
         <div class="row">
             <div class="col-lg-8 col-md-12">
                 <h1 style="margin-bottom: 70px; margin-top: 70px; background-color: #d2f8d2; text-align: center; font-size: 36px; color: #555; padding: 20px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
-                    Trainer Profiles<br>
-                    <span style="font-size: 24px; color: #888;">Waiting for Confirmation</span>
+                    Профили на клиенти<br>
+                    <span style="font-size: 24px; color: #888;">чакащи за одобрение</span>
                 </h1>
                 <div *ngIf="trainersData!=undefined">
                     <div class="row" *ngFor="let trainer of filterData">
@@ -19,7 +19,6 @@
                                     <h3><a routerLink="/job-details"></a>{{trainer.userId.firstName}} {{trainer.userId.lastName}}</h3>
                                     <ul class="job-list1">
                                         <li><i class="ri-menu-unfold-fill"></i>{{trainer.category}}</li>
-                                        <li><i class="ri-time-line"></i> 2 Week Ago</li>
                                     </ul>
                                     <span><i class="ri-map-pin-line"></i>{{trainer.town}}</span>
                                 </div>
@@ -27,7 +26,7 @@
                                     <ul class="job-list2">
                                         <li class="time">{{trainer.typeOfTraining}}</li>
                                     </ul>
-                                    <div *ngIf="trainer.price!==null" class="price">{{trainer.price}}<span> BGN /Per Hour</span></div>
+                                    <div *ngIf="trainer.price!==null" class="price">{{trainer.price}}<span> лв. /На час</span></div>
                                 </div>
                                 <button class="bookmark-btn"><i class="ri-bookmark-line"></i></button>
                                 <div class="button-container">

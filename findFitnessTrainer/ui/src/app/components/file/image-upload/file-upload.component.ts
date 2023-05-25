@@ -83,7 +83,7 @@ export class FileUploadComponent implements OnInit {
                         if (err.error && err.error.message) {
                             this.message = err.error.message;
                         } else {
-                            this.message = 'Could not upload the image!';
+                            this.message = 'Снимката не може да бъде добавена!';
                         }
 
                         this.currentFile = undefined;
